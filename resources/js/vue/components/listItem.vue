@@ -33,7 +33,7 @@
             },
 
             removeItem() {
-                axios.delete('api/item' + this.item.id)
+                axios.delete('api/item/' + this.item.id)
                     .then(response => {
                         if (response.status === 200) {
                             this.$emit('itemchanged');
