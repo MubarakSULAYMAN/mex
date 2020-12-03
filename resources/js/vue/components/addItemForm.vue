@@ -44,7 +44,7 @@
 
 </script>
 
-<style>
+<style scoped>
     .addItem {
         display: flex;
         justify-content: center;

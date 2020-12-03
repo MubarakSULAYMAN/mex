@@ -1,0 +1,66 @@
+<template>
+    <div>
+        <div class="fixed bottom-4 left-4 space-y-1 z-50">
+            <div class="pt-3 pr-1 pl-3 pb-2 rounded-full text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
+                @click="$router.push('/home')">
+                <font-awesome-icon class="hover:text-purple-700 mr-2" :icon="['fas', 'home']" />
+            </div>
+            <div class="pt-3 pr-1 pl-3 pb-2 rounded-full text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
+                @click="$router.go(-1)">
+                <font-awesome-icon class="hover:text-purple-700 mr-2" :icon="['fas', 'chevron-circle-left']" />
+            </div>
+        </div>
+
+        <button
+            class="fixed bottom-10 right-10 py-2 px-6 rounded-md text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100 z-50"
+            @click="$router.push('expenses/modify')">
+            <font-awesome-icon class="hover:text-yellow-700 mr-2" :icon="['fas', 'file-invoice']" />
+            Modify
+        </button>
+
+        <div class="p-12">
+            <p class="group text-purple-700 font-light text-xl inline-block"> Here are the existing records. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click the button below
+                    to modify.</span> </p>
+            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
+                <tr class="bg-purple-700 border border-collapse text-white text-center">
+                    <th class="s-n px-8 py-4"> S/N </th>
+                    <th class="w-3/5 px-8 py-4"> Narration </th>
+                    <th class="category-col px-8 py-4"> Category </th>
+                    <th class="w-1/5 px-8 py-4"> Amount </th>
+                    <th class="w-1/5 px-8 py-4"> Date of Expenditure </th>
+                </tr>
+                <tr class="border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                    <td class="border px-8 py-4"> 1
+                    </td>
+                    <td class="border px-8 py-4"> Some superstory about fantasy. </td>
+                    <td class="border px-8 py-4"> Food </td>
+                    <td class="border px-8 py-4"> NGN5,000 </td>
+                    <td class="border px-8 py-4"> 12/12/2020 </td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</template>
+
+<script>
+    export default {
+        date: function () {
+            return {
+                // private hover: boolean = false,
+            }
+        }
+
+    }
+
+</script>
+
+<style scoped>
+    .s-n {
+        width: 5%;
+    }
+
+    .category-col {
+        width: 15%;
+    }
+
+</style>
