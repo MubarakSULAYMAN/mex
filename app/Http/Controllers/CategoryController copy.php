@@ -3,10 +3,10 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
+use App\Models\Item;
 use Illuminate\Support\Carbon;
 
-class CategoryController extends Controller
+class ItemController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,8 +15,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // return Category::orderBy('created_at', 'DESC')->get();
-        return Category::all();
+        return Item::all();
     }
 
     /**
@@ -35,21 +34,13 @@ class CategoryController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    // public function store(Request $request)
-    // {
-    //     $newCategory = new Category;
-    //     $newCategory->name = $request->category["name"];
-    //     $newCategory->save();
-
-    //     return $newCategory;
-    // }
     public function store(Request $request)
     {
-        $newCategory = new Category;
-        $newCategory->name = $request->item["name"];
-        $newCategory->save();
+        $newItem = new Item;
+        $newItem->name = $request->item["name"];
+        $newItem->save();
 
-        return $newCategory;
+        return $newItem;
     }
 
     /**
@@ -83,16 +74,16 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $existingCategory = Category::find( $id );
+        $existingItem = Item::find( $id );
 
-        if ($existingCategory) {
-            $existingCategory->completed = $request->category['completed'] ? true : false;
-            $existingCategory->completed_at = $request->category['completed'] ? Carbon::now() : false;
-            $existingCategory->save();
-            return $existingCategory;
+        if ($existingItem) {
+            $existingItem->completed = $request->item['completed'] ? true : false;
+            $existingItem->completed_at = $request->item['completed'] ? Carbon::now() : false;
+            $existingItem->save();
+            return $existingItem;
         }
 
-        return "Category not found";
+        return "Item not found";
     }
 
     /**
@@ -103,13 +94,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $existingCategory = Category::find($id);
+        $existingItem = Item::find($id);
 
-        if ($existingCategory) {
-            $existingCategory->delete();
-            return "Category successfully deleted.";
+        if ($existingItem) {
+            $existingItem->delete();
+            return "Item successfully deleted.";
         }
 
-        return "Category not found";
+        return "Item not found";
     }
 }

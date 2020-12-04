@@ -1,71 +1,62 @@
 <template>
     <div>
-        <div class="fixed bottom-4 left-4 space-y-1 z-50">
-            <div class="pt-3 pr-1 pl-3 pb-2 rounded-full text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
-                @click="$router.push('/home')">
-                <font-awesome-icon class="hover:text-purple-700 mr-2" :icon="['fas', 'home']" />
-            </div>
-            <div class="pt-3 pr-1 pl-3 pb-2 rounded-full text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
-                @click="$router.go(-1)">
-                <font-awesome-icon class="hover:text-purple-700 mr-2" :icon="['fas', 'chevron-circle-left']" />
-            </div>
-        </div>
+        <the-shortcuts />
 
-        <section class="m-12" v-if="formStage === 'previewRecords'">
-            <p class="text-purple-700 font-light text-xl"> Will you like to add to list? </p>
-            <div class="px-12 py-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
-                <input
-                    class="w-5/6 h-10 p-2 border-2 border-purple-700 font-medium text-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500">
+        <section class="m-4 md:m-12" v-if="formStage === 'previewRecords'">
+            <p class="text-purple-700 font-light md:text-xl"> Will you like to add to list? </p>
+            <div class="px-4 md:px-12 py-2 md:py-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
+                <input type="text" v-model="category.name"
+                    class="w-full md:w-5/6 p-2 border-2 border-purple-700 font-medium text-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500">
                 <button
-                    class="h-10 py-2 px-6 ml-12 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
-                    @click="addNewRecord()">
+                    class="py-1 md:py-2 px-3 md:px-6 mt-4 md:ml-12 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
+                    @click="addItems()">
                     <font-awesome-icon class="hover:text-green-700 mr-2" :icon="['fas', 'folder-plus']" />
                     Add
                 </button>
             </div>
             <div class="add-modal-overlay bg-purple-100" v-if="addRecordPopUp" @click="closeNewRecordPopUp()">
-                <div class="add-modal group m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
-                    <font-awesome-icon class=" text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeNewRecordPopUp()" />
+                <div class="add-modal group m-4 md:m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
+                    <font-awesome-icon class=" text-red-500 text-2xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeNewRecordPopUp()" />
 
-                    <p class="p-10 text-3xl text-center text-green-500">
+                    <p class="p-2 md:p-10 text-xl md:text-3xl text-center text-green-500">
                         Category (name) added successfully
                         <span class="ri-checkbox-circle-line inline-block"></span>
                     </p>
                 </div>
             </div>
 
-            <p class="group text-purple-700 font-light text-xl mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click
+            <p class="group text-purple-700 font-light text-xl mt-4 md:mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click
                     highlighter icon to
                     proceed.</span> </p>
             <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="1/10 px-8 py-4"> S/N </th>
-                    <th class="w-1/2 px-8 py-4"> Category Name </th>
-                    <th class="w-1/5 px-8 py-4"> Date Created </th>
-                    <th class="w-1/5 px-8 py-4"> Status </th>
+                    <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
+                    <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
+                    <th class="w-1/5 p-2 md:px-8 md:py-4"> Date Created </th>
+                    <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
                 </tr>
                 <tr
                     class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
                     <td class="border px-4 py-4"> 1
                         <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
                     </td>
-                    <td class="border px-8 py-4"> Food </td>
-                    <td class="border px-8 py-4"> 12/12/2020 </td>
-                    <td class="border px-8 py-4"> Active </td>
+                    <td class="border p-2 md:px-8 md:py-4"> Food </td>
+                    <td class="border p-2 md:px-8 md:py-4"> 12/12/2020 </td>
+                    <td class="border p-2 md:px-8 md:py-4"> Active </td>
                 </tr>
             </table>
         </section>
 
         <section v-if="formStage === 'editDeleteRecords'">
-            <div class="p-12">
-                <p class="group text-purple-700 font-light text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
+            <div class="p-4 md:p-12">
+                <p class="group text-purple-700 font-light md:text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
                         icon to delete or pen-on-note to edit.</span> </p>
-                <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
+                <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
-                        <th class="1/10 px-8 py-4"> S/N </th>
-                        <th class="w-1/2 px-8 py-4"> Category Name </th>
-                        <th class="w-1/5 px-8 py-4"> Date Created </th>
-                        <th class="w-1/5 px-8 py-4"> Status </th>
+                        <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
+                        <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4"> Date Created </th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
                     </tr>
                     <tr
                         class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
@@ -74,19 +65,19 @@
                             1
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-pink-700" :icon="['fas', 'edit']" v-if="isEditing === false" @click="editRecords()" />
                         </td>
-                        <td class="border px-8 py-4">
+                        <td class="border p-2 md:px-8 md:py-4">
                             <span v-if="isEditing === false"> Name </span>
                             <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" v-if="isEditing">
                         </td>
-                        <td class="border px-8 py-4">
+                        <td class="border p-2 md:px-8 md:py-4">
                             <span v-if="isEditing === false"> 12/12/2020 </span>
                             <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" v-if="isEditing">
                         </td>
-                        <td class="border px-8 py-4">
+                        <td class="border p-2 md:px-8 md:py-4">
                             <span v-if="isEditing === false"> Active </span>
                             <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
@@ -95,16 +86,16 @@
                     </tr>
                 </table>
 
-                <div class="fixed bottom-10 right-10 space-x-6 z-50">
+                <div class="fixed bottom-5 md:bottom-10 right-5 md:right-10 space-x-6 z-50">
                     <button
-                        class="py-2 px-6 rounded-md text-white font-light text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-300"
+                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-300"
                         v-if="isEditing" @click="cancelModification()">
                         <font-awesome-icon class="hover:text-red-500 mr-2" :icon="['fas', 'times']" />
                         Cancel
                     </button>
 
                     <button
-                        class="py-2 px-6 rounded-md text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-300"
+                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-300"
                         v-if="isEditing" @click="saveModification()">
                         <font-awesome-icon class="hover:text-purple-500 mr-2" :icon="['fas', 'save']" />
                         Save
@@ -112,11 +103,11 @@
                 </div>
 
                 <div class="confirm-delete-modal-overlay bg-purple-100" v-if="confirmDeletePopUp" @click="cancelDelete()">
-                    <div class="confirm-delete-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="confirmDeletePopUp">
-                        <p class="p-10 text-3xl text-center text-red-500"> Are you sure you want to delete (name) from Category? </p>
-                        <div class="flex place-content-center pb-12 space-x-6">
+                    <div class="confirm-delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="confirmDeletePopUp">
+                        <p class="p-4 md:p-10 text-lg md:text-3xl text-center text-red-500"> Are you sure you want to delete (name) from Category? </p>
+                        <div class="flex place-content-center pb-4 md:pb-12 space-x-6">
                             <button
-                                class="border border-red-700 px-4 py-2 rounded-full font-medium text-lg text-red-700 transition duration-1500 ease-in-out hover:bg-red-700 hover:text-white focus:outline-none"
+                                class="border border-red-700 px-2 md:px-4 py-1 md:py-2 rounded-full font-medium md:text-lg text-red-700 transition duration-1500 ease-in-out hover:bg-red-700 hover:text-white focus:outline-none"
                                 @click="confirmDelete()">
                                 <font-awesome-icon :icon="['fas', 'trash-alt']" />
                                 Confirm
@@ -132,19 +123,19 @@
                 </div>
 
                 <div class="delete-modal-overlay bg-purple-100" v-if="deleteRecordPopUp" @click="closeDeletePopUp()">
-                    <div class="delete-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="deleteRecordPopUp">
+                    <div class="delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="deleteRecordPopUp">
                         <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeDeletePopUp()" />
 
-                        <p class="p-10 text-3xl text-center text-red-500"> (name) is successfully deleted from Category. </p>
+                        <p class="p-2 md:p-10 text-lg md:text-3xl text-center text-red-500"> (name) is successfully deleted from Category. </p>
                     </div>
                 </div>
 
                 <div class="modification-modal-overlay bg-purple-100" v-if="modificationPopUp" @click="closeModificationPopUp()">
-                    <div class="modification-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl border" v-if="modificationPopUp">
+                    <div class="modification-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl border" v-if="modificationPopUp">
                         <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
                             @click="closeModificationPopUp()" />
 
-                        <p class="p-10 text-3xl text-center text-purple-700"> Modification implemented successfully. </p>
+                        <p class="p-2 md:p-10 text-lg md:text-3xl text-center text-purple-700"> Modification implemented successfully. </p>
                     </div>
                 </div>
             </div>
@@ -153,9 +144,21 @@
 </template>
 
 <script>
+    import theShortcuts from "../../components/theShortcuts"
+
     export default {
+        components: {
+            theShortcuts,
+        },
+
         data: function () {
             return {
+                category: {
+                    name: ''
+                },
+
+                categories: [],
+
                 formStage: 'previewRecords',
                 // isPreviewing: false,
                 isEditing: false,
@@ -168,6 +171,71 @@
         },
 
         methods: {
+            addItems() {
+                if (this.category.name === '') {
+                    return;
+                }
+
+                axios.post('api/category/store', {
+                        category: this.category
+                    })
+                    .then(response => {
+                        if (response.status === 201) {
+                            this.category.name = "";
+                            // this.$emit('reloadlist');
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    })
+            },
+
+            // getList() {
+            //     axios.get('api/items')
+            //     .then( response => {
+            //         this.items = response.data
+            //     })
+            //     .catch (error => {
+            //         console.log(error.message);
+            //     });
+            // },
+
+            getRecord() {
+                axios.get('api/categories')
+                    .then(response => {
+                        this.categories = response.data;
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                    })
+            },
+
+            // addNewRecord() {
+            //     if (this.category.name === '') {
+            //         return;
+            //     }
+                
+            //     console.log("Sent");
+            //     axios.post('/api/category/store', {
+            //             category: this.category
+            //         })
+            //         .then(response => {
+            //             if (response.status === 201) {
+            //                 this.category.name = "";
+                            // this.$emit('reloadlist');
+                    //     }
+                    // })
+                    // .catch(error => {
+                    //     console.log(error.message);
+                    // })
+                // this.addRecordPopUp = true;
+
+//                     axios.post('/api/task',{title:this.title})
+// .then((res) => console.log(res.data))
+// .catch((err) => console.log(err));
+                // this.addRecordPopUp = true;
+            // },
+
             closeModificationPopUp() {
                 this.modificationPopUp = false;
                 this.isEditing = false;
@@ -185,8 +253,24 @@
                 this.isDeleting = false;
             },
 
-            addNewRecord() {
-                this.addRecordPopUp = true;
+            updateRecord() {
+                if (this.category.name === '') {
+                    return;
+                }
+
+                axios.put('api/category/' + this.category.id, {
+                        category: this.category
+                    })
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.category.name === ''
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    })
+
+                // this.addRecordPopUp = true;
             },
 
             closeNewRecordPopUp() {
@@ -222,6 +306,10 @@
                 this.isEditing = false;
                 this.isDeleting = false;
             }
+        },
+
+        created() {
+            this.getRecord();
         }
 
     }

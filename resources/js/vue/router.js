@@ -30,6 +30,11 @@ const router = new VueRouter({
           component: () => import('./views/pages/modifyCategories.vue')
         },
         {
+          path: '/todo',
+          name: 'Todo',
+          component: () => import('./views/pages/todo.vue')
+        },
+        {
           path: '/expenses',
           name: 'Expenses',
           component: () => import('./views/pages/expenses.vue')

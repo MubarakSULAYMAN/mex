@@ -14,10 +14,16 @@ class CreateExpensesTable extends Migration
     public function up()
     {
         Schema::create('expenses', function (Blueprint $table) {
+            Schema::enableForeignKeyConstraints();
+
             $table->id();
             $table->text('narration');
-            $table->string('category');
-            $table->foreign('category')->references('name')->on('categories');
+            // $table->string('category')->nullable();
+            // $table->foreign('category')->references('name')->on('categories');
+            $table->foreignId('category')
+                    ->constrained('categories');
+                    // ->onDelete('cascade');
+            $table->string('amount');
             $table->timestamps();
         });
     }
