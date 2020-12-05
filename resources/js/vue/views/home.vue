@@ -5,21 +5,21 @@
 
         <div class="grid gap-4 md:gap-12 grid-cols-1 md:grid-cols-2">
             <button
-                class="category bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:-translate-x-4 hover:-translate-y-4  hover:-skew-x-3 hover:-skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
+                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:-translate-x-4 hover:-translate-y-4  hover:-skew-x-3 hover:-skew-y-3 focus:ring-8 focus:ring-purple-700 focus:outline-none"
                 @click="$router.push('categories')"> Categories </button>
             <!-- </div> -->
 
             <button
-                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:translate-x-4 hover:-translate-y-4  hover:-skewx-3 hover:skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
+                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:translate-x-4 hover:-translate-y-4  hover:-skewx-3 hover:skew-y-3 focus:ring-8 focus:ring-purple-700 focus:outline-none"
                 @click="$router.push('expenses')"> Expenses </button>
 
             <button
-                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:-translate-x-4 hover:translate-y-4  hover:skew-x-3 hover:skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
+                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:-translate-x-4 hover:translate-y-4  hover:skew-x-3 hover:skew-y-3 focus:ring-8 focus:ring-purple-700 focus:outline-none"
                 @click="$router.push('expenses-summary')"> Expenses Summary
             </button>
 
             <button
-                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:translate-x-4 hover:translate-y-4  hover:-skew-x-3 hover:-skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
+                class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:translate-x-4 hover:translate-y-4  hover:-skew-x-3 hover:-skew-y-3 focus:ring-8 focus:ring-purple-700 focus:outline-none"
                 @click="$router.push('expenses-report')"> Expenses Report </button>
         </div>
     </div>
@@ -33,7 +33,5 @@
 </script>
 
 <style scoped>
-.category {
-    background-image: transparent url('../assets/img/data_report.svg') no-repeat 25% 50%;
-}
+
 </style>

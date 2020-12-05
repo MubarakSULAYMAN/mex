@@ -16,19 +16,19 @@
             </div>
             <div class="add-modal-overlay bg-purple-100" v-if="addRecordPopUp" @click="closeNewRecordPopUp()">
                 <div class="add-modal group m-4 md:m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
-                    <font-awesome-icon class=" text-red-500 text-xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
-                        @click="closeNewRecordPopUp()" />
+                    <font-awesome-icon class=" text-red-500 text-2xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeNewRecordPopUp()" />
 
-                    <p class="p-2 md:p-10 md:text-3xl text-center text-green-500">
-                        Field (name) added successfully
+                    <p class="p-2 md:p-10 text-xl md:text-3xl text-center text-green-500">
+                        Category (name) added successfully
                         <span class="ri-checkbox-circle-line inline-block"></span>
                     </p>
                 </div>
             </div>
 
-            <p class="group text-purple-700 font-light md:text-xl mt-4 md:mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span> </p>
-            
-            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+            <p class="group text-purple-700 font-light text-xl mt-4 md:mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click
+                    highlighter icon to
+                    proceed.</span> </p>
+            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
                     <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
                     <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
@@ -36,7 +36,7 @@
                     <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
                 </tr>
                 <tr
-                    class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                    class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
                     <td class="border px-4 py-4"> 1
                         <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
                     </td>
@@ -51,7 +51,7 @@
             <div class="p-4 md:p-12">
                 <p class="group text-purple-700 font-light md:text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
                         icon to delete or pen-on-note to edit.</span> </p>
-                <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+                <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
                         <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
                         <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
@@ -59,7 +59,7 @@
                         <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
                     </tr>
                     <tr
-                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                        class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
                         <td class="border px-4 py-4">
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="openDeletePopUp()" />
                             1
@@ -88,14 +88,14 @@
 
                 <div class="fixed bottom-5 md:bottom-10 right-5 md:right-10 space-x-6 z-50">
                     <button
-                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-300"
+                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-300"
                         v-if="isEditing" @click="cancelModification()">
                         <font-awesome-icon class="hover:text-red-500 mr-2" :icon="['fas', 'times']" />
                         Cancel
                     </button>
 
                     <button
-                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-300"
+                        class="py-1 md:py-2 px-2 md:px-6 rounded-md text-white font-light text-lg md:text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-300"
                         v-if="isEditing" @click="saveModification()">
                         <font-awesome-icon class="hover:text-purple-500 mr-2" :icon="['fas', 'save']" />
                         Save

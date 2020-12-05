@@ -2,52 +2,51 @@
     <div>
         <the-shortcuts />
 
-        <section class="m-4 md:m-12" v-if="formStage === 'previewRecords'">
-            <p class="text-purple-700 font-light md:text-xl"> Will you like to add to list? </p>
-            <div class="p-2 md:p-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
+        <section class="m-12" v-if="formStage === 'previewRecords'">
+            <p class="text-purple-700 font-light text-xl"> Will you like to add to list? </p>
+            <div class="px-12 py-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
                 <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
-                        <th class="w-2/5 p-1 md:p-1 md:px-8 md:md:py-4"> Narration </th>
-                        <th class="w-1/5 p-1 md:px-8 md:py-4"> Category </th>
-                        <th class="w-1/5 p-1 md:px-8 md:py-4"> Amount </th>
-                        <th class="w-1/5 p-1 md:px-8 md:py-4"> Date of Expenditure </th>
+                        <th class="w-2/5 px-8 py-4"> Narration </th>
+                        <th class="w-1/5 px-8 py-4"> Category </th>
+                        <th class="w-1/5 px-8 py-4"> Amount </th>
+                        <th class="w-1/5 px-8 py-4"> Date of Expenditure </th>
                     </tr>
-                    <tr
-                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
-                        <td class="border p-1 md:px-8 md:py-4">
+                    <tr class="">
+                        <td class="border px-8 py-4">
                             <input
-                                class="w-full p-1 md:p-2 md:font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="">
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <select
-                                class="w-full p-1 md:p-2 bg-white border-2 border-purple-700 rounded-md text-purple-700 md:font-medium inline-flex items-center transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500">
+                                class="w-full p-2 bg-white border-2 border-purple-700 rounded-md text-purple-700 font-semibold inline-flex items-center transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500">
                                 <option
-                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap">
+                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-2 px-4 block whitespace-no-wrap">
                                     Indiana</option>
                                 <option
-                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap">
+                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-2 px-4 block whitespace-no-wrap">
                                     Michigan</option>
                                 <option
-                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap">
+                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-2 px-4 block whitespace-no-wrap">
                                     Ohio</option>
                             </select>
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <input
-                                class="w-full p-1 md:p-2 md:font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="">
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <input
-                                class="w-full p-1 md:p-2 md:font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 font-medium text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="">
                         </td>
                     </tr>
                 </table>
 
                 <button
-                    class="p-1 md:py-2 md:px-6 mt-2 md:mt-6 right-0 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
+                    class="h-10 py-2 px-6 mt-6 right-0 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
                     @click="addNewRecord()">
                     <font-awesome-icon class="hover:text-green-700 mr-2" :icon="['fas', 'folder-plus']" />
                     Add
@@ -55,69 +54,70 @@
             </div>
 
             <div class="add-modal-overlay bg-purple-100" v-if="addRecordPopUp" @click="closeNewRecordPopUp()">
-                <div class="add-modal group m-4 md:m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
-                    <font-awesome-icon class=" text-red-500 text-xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
-                        @click="closeNewRecordPopUp()" />
+                <div class="add-modal group m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
+                    <font-awesome-icon class=" text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeNewRecordPopUp()" />
 
-                    <p class="p-2 md:p-10 md:text-3xl text-center text-green-500">
-                        Field (name) added successfully
+                    <p class="p-10 text-3xl text-center text-green-500">
+                        Category (name) added successfully
                         <span class="ri-checkbox-circle-line inline-block"></span>
                     </p>
                 </div>
             </div>
 
-            <p class="group text-purple-700 font-light md:text-xl mt-4 md:mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span> </p>
+            <p class="group text-purple-700 font-light text-xl mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click
+                    highlighter icon to
+                    proceed.</span> </p>
 
-            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="s-n p-1 md:px-8 md:py-4"> S/N </th>
-                    <th class="w-3/5 p-1 md:px-8 md:py-4"> Narration </th>
-                    <th class="category-col p-1 md:px-8 md:py-4"> Category </th>
-                    <th class="w-1/5 p-1 md:px-8 md:py-4"> Amount </th>
-                    <th class="w-1/5 p-1 md:px-8 md:py-4"> Date of Expenditure </th>
+                    <th class="s-n px-8 py-4"> S/N </th>
+                    <th class="w-3/5 px-8 py-4"> Narration </th>
+                    <th class="category-col px-8 py-4"> Category </th>
+                    <th class="w-1/5 px-8 py-4"> Amount </th>
+                    <th class="w-1/5 px-8 py-4"> Date of Expenditure </th>
                 </tr>
                 <tr
-                    class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                    class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
                     <td class="border px-2 py-4"> 1
                         <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
                     </td>
-                    <td class="border p-1 md:px-8 md:py-4"> Some super story </td>
-                    <td class="border p-1 md:px-8 md:py-4"> Food </td>
-                    <td class="border p-1 md:px-8 md:py-4"> NGN5,000 </td>
-                    <td class="border p-1 md:px-8 md:py-4"> 12/12/2020 </td>
+                    <td class="border px-8 py-4"> Some super story </td>
+                    <td class="border px-8 py-4"> Food </td>
+                    <td class="border px-8 py-4"> NGN5,000 </td>
+                    <td class="border px-8 py-4"> 12/12/2020 </td>
                 </tr>
             </table>
         </section>
 
         <section v-if="formStage === 'editDeleteRecords'">
-            <div class="p-4 md:p-12">
-                <p class="group text-purple-700 font-light md:text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
+            <div class="p-12">
+                <p class="group text-purple-700 font-light text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
                         icon to delete or pen-on-note to edit.</span> </p>
-                <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+                <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
-                        <th class="s-n p-1 md:px-8 md:py-4"> S/N </th>
-                        <th class="w-3/5 p-1 md:px-8 md:py-4"> Narration </th>
-                        <th class="category-col p-1 md:px-8 md:py-4"> Category </th>
-                        <th class="w-1/12 p-1 md:px-8 md:py-4"> Amount </th>
-                        <th class="w-1/12 p-1 md:px-8 md:py-4"> Date of Expenditure </th>
+                        <th class="s-n px-8 py-4"> S/N </th>
+                        <th class="w-3/5 px-8 py-4"> Narration </th>
+                        <th class="category-col px-8 py-4"> Category </th>
+                        <th class="w-1/12 px-8 py-4"> Amount </th>
+                        <th class="w-1/12 px-8 py-4"> Date of Expenditure </th>
                     </tr>
                     <tr
-                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                        class="group border border-collapse even:border-purple-700 font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
                         <td class="border px-4 py-4">
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="openDeletePopUp()" />
                             1
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-pink-700" :icon="['fas', 'edit']" v-if="isEditing === false" @click="editRecords()" />
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <span v-if="isEditing === false"> Some superstory about fantasy. </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md md:font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" v-if="isEditing">
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <span v-if="isEditing === false"> Food </span>
                             <select
-                                class="w-full p-2 bg-white border-2 border-transparent shadow-lg rounded-md md:font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 bg-white border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 v-if="isEditing">
                                 <option
                                     class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-2 px-4 block whitespace-no-wrap">
@@ -130,31 +130,31 @@
                                     Ohio</option>
                             </select>
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <span v-if="isEditing === false"> NGN5,000 </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md md:font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" v-if="isEditing">
                         </td>
-                        <td class="border p-1 md:px-8 md:py-4">
+                        <td class="border px-8 py-4">
                             <span v-if="isEditing === false"> 12/12/2020 </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md md:font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" v-if="isEditing">
                         </td>
                     </tr>
                 </table>
 
-                <div class="fixed bottom-6 md:bottom-10 right-6 md:right-10 space-x-6 z-50">
+                <div class="fixed bottom-10 right-10 space-x-6 z-50">
                     <button
-                        class="p-1 md:py-2 md:px-6 rounded-md text-white font-light md:text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-100"
+                        class="py-2 px-6 rounded-md text-white font-light text-2xl bg-red-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-red-700 focus:outline-none focus:ring-8 focus:ring-red-500 focus:ring-opacity-50 border hover:border-red-700 hover:bg-purple-100"
                         v-if="isEditing" @click="cancelModification()">
                         <font-awesome-icon class="hover:text-red-500 mr-2" :icon="['fas', 'times']" />
                         Cancel
                     </button>
 
                     <button
-                        class="py-1 md:py-2 md:px-6 rounded-md text-white font-light md:text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
+                        class="py-2 px-6 rounded-md text-white font-light text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100"
                         v-if="isEditing" @click="saveModification()">
                         <font-awesome-icon class="hover:text-purple-500 mr-2" :icon="['fas', 'save']" />
                         Save
@@ -162,17 +162,17 @@
                 </div>
 
                 <div class="confirm-delete-modal-overlay bg-purple-100" v-if="confirmDeletePopUp" @click="cancelDelete()">
-                    <div class="confirm-delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="confirmDeletePopUp">
-                        <p class="p-4 md:p-10 md:text-3xl text-center text-red-500"> Are you sure you want to delete (name) from Category? </p>
-                        <div class="flex place-content-center pb-4 md:pb-12 space-x-6">
+                    <div class="confirm-delete-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="confirmDeletePopUp">
+                        <p class="p-10 text-3xl text-center text-red-500"> Are you sure you want to delete (name) from Category? </p>
+                        <div class="flex place-content-center pb-12 space-x-6">
                             <button
-                                class="border border-red-700 p-1 md:px-4 md:py-2 rounded-full md:font-medium md:text-lg text-red-700 transition duration-1500 ease-in-out hover:bg-red-700 hover:text-white focus:outline-none"
+                                class="border border-red-700 px-4 py-2 rounded-full font-medium text-lg text-red-700 transition duration-1500 ease-in-out hover:bg-red-700 hover:text-white focus:outline-none"
                                 @click="confirmDelete()">
                                 <font-awesome-icon :icon="['fas', 'trash-alt']" />
                                 Confirm
                             </button>
                             <button
-                                class="border border-purple-700 px-1 md:px-5 md:py-2 rounded-full md:font-medium md:text-lg text-purple-700 transition duration-1500 ease-in-out hover:bg-purple-700 hover:text-white focus:outline-none"
+                                class="border border-purple-700 px-5 py-2 rounded-full font-medium text-lg text-purple-700 transition duration-1500 ease-in-out hover:bg-purple-700 hover:text-white focus:outline-none"
                                 @click="cancelDelete()">
                                 <font-awesome-icon :icon="['fas', 'backspace']" />
                                 Cancel
@@ -182,19 +182,19 @@
                 </div>
 
                 <div class="delete-modal-overlay bg-purple-100" v-if="deleteRecordPopUp" @click="closeDeletePopUp()">
-                    <div class="delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="deleteRecordPopUp">
-                        <font-awesome-icon class="text-red-500 text-2xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeDeletePopUp()" />
+                    <div class="delete-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="deleteRecordPopUp">
+                        <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeDeletePopUp()" />
 
-                        <p class="p-10 text-lg md:text-3xl text-center text-red-500"> (name) is successfully deleted from Category. </p>
+                        <p class="p-10 text-3xl text-center text-red-500"> (name) is successfully deleted from Category. </p>
                     </div>
                 </div>
 
                 <div class="modification-modal-overlay bg-purple-100" v-if="modificationPopUp" @click="closeModificationPopUp()">
-                    <div class="modification-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl border" v-if="modificationPopUp">
-                        <font-awesome-icon class="text-red-500 text-2xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
+                    <div class="modification-modal group m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl border" v-if="modificationPopUp">
+                        <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
                             @click="closeModificationPopUp()" />
 
-                        <p class="p-10 text-lg md:text-3xl text-center text-purple-700"> Modification implemented successfully. </p>
+                        <p class="p-10 text-3xl text-center text-purple-700"> Modification implemented successfully. </p>
                     </div>
                 </div>
             </div>
