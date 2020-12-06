@@ -2,21 +2,35 @@
     <div>
         <the-shortcuts />
 
+        <!-- <p v-for="(x, index) in titles" :key="index">{{ x.title }}</p> -->
+
         <section class="m-4 md:m-12" v-if="formStage === 'previewRecords'">
-            <p class="text-purple-700 font-light md:text-xl"> Will you like to add to list? </p>
-            <div class="px-4 md:px-12 py-2 md:py-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
-                <input type="text" v-model="category.name"
-                    class="w-full md:w-5/6 p-2 border-2 border-purple-700 font-medium text-purple-700 rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500">
-                <button
-                    class="py-1 md:py-2 px-3 md:px-6 mt-4 md:ml-12 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
-                    @click="addItems()">
-                    <font-awesome-icon class="hover:text-green-700 mr-2" :icon="['fas', 'folder-plus']" />
-                    Add
-                </button>
+            <p class="font-light md:text-xl">Will you like to add to list?</p>
+            <div class="px-6 py-2 md:py-6 rounded-md transition duration-1500 ease-in-out hover:shadow-xl">
+                <div class="grid grid-cols-1 md:grid-cols-12 gap-2 md:gap-4 w-100">
+                    <span class="col-span-11">
+                        <input type="text" v-model="category.name"
+                            class="w-full p-2 border-2 border-purple-700 font-medium rounded-md transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
+                            autocomplete="off" />
+                        <div class="mt-2 text-xs text-red-700 font-medium" v-if="fieldError">
+                            You cannot add an empty field.
+                        </div>
+                    </span>
+                    <div class="">
+                        <button
+                            class="md:w-full md:h-11 p-2 rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50"
+                            @click="addNewRecord()">
+                            <font-awesome-icon class="hover:text-green-700 mr-2" :icon="['fas', 'folder-plus']" />
+                            Add
+                        </button>
+                    </div>
+                </div>
             </div>
-            <div class="add-modal-overlay bg-purple-100" v-if="addRecordPopUp" @click="closeNewRecordPopUp()">
-                <div class="add-modal group m-4 md:m-12 shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none" v-if="addRecordPopUp">
-                    <font-awesome-icon class=" text-red-500 text-xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
+
+            <div class="fixed top-0 bottom-0 right-0 left-0 bg-purple-100 z-50" v-if="addRecordPopUp" @click="closeNewRecordPopUp()">
+                <div class="fixed top-64 sm:top-56 md:top-52 left-20 sm:left-56 md:left-96 pb-6 md:pb-12 text-xs sm:text-base group shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none"
+                    v-if="addRecordPopUp">
+                    <font-awesome-icon class="text-red-500 text-xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
                         @click="closeNewRecordPopUp()" />
 
                     <p class="p-2 md:p-10 md:text-3xl text-center text-green-500">
@@ -26,62 +40,68 @@
                 </div>
             </div>
 
-            <p class="group text-purple-700 font-light md:text-xl mt-4 md:mt-12 inline-block"> Modify records as you wish. <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span> </p>
-            
-            <table class="table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+            <p class="group font-light md:text-xl mt-4 md:mt-12 inline-block">
+                Modify records as you wish.
+                <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span>
+            </p>
+
+            <table class="md:w-full table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
-                    <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
-                    <th class="w-1/5 p-2 md:px-8 md:py-4"> Date Created </th>
-                    <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
+                    <th class="w-1/12 p-2 md:px-8 md:py-4">S/N</th>
+                    <th class="w-1/2 p-2 md:px-8 md:py-4">Category Name</th>
+                    <th class="w-1/5 p-2 md:px-8 md:py-4">Date Created</th>
+                    <th class="w-1/5 p-2 md:px-8 md:py-4">Status</th>
                 </tr>
-                <tr
-                    class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
-                    <td class="border px-4 py-4"> 1
+                <tr class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
+                    v-for="(item, index) in categories" :key="index">
+                    <td class="border px-4 py-4 break-words">
+                        {{ ++index }}
                         <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
                     </td>
-                    <td class="border p-2 md:px-8 md:py-4"> Food </td>
-                    <td class="border p-2 md:px-8 md:py-4"> 12/12/2020 </td>
-                    <td class="border p-2 md:px-8 md:py-4"> Active </td>
+                    <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.name }}</td>
+                    <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.created_at }}</td>
+                    <td class="border p-2 md:px-8 md:py-4 break-words">Active</td>
                 </tr>
             </table>
         </section>
 
         <section v-if="formStage === 'editDeleteRecords'">
             <div class="p-4 md:p-12">
-                <p class="group text-purple-700 font-light md:text-xl inline-block"> You can only edit and delete here. <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash
-                        icon to delete or pen-on-note to edit.</span> </p>
+                <p class="group font-light md:text-xl inline-block">
+                    You can only edit and delete here.
+                    <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash icon to delete or pen-on-note to edit.</span>
+                </p>
                 <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
-                        <th class="w-1/12 p-2 md:px-8 md:py-4"> S/N </th>
-                        <th class="w-1/2 p-2 md:px-8 md:py-4"> Category Name </th>
-                        <th class="w-1/5 p-2 md:px-8 md:py-4"> Date Created </th>
-                        <th class="w-1/5 p-2 md:px-8 md:py-4"> Status </th>
+                        <th class="w-1/12 p-2 md:px-8 md:py-4">S/N</th>
+                        <th class="w-1/2 p-2 md:px-8 md:py-4">Category Name</th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4">Date Created</th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4">Status</th>
                     </tr>
                     <tr
-                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-purple-700 text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
-                        <td class="border px-4 py-4">
+                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                        <td class="border px-4 py-4 break-words">
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="openDeletePopUp()" />
                             1
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-pink-700" :icon="['fas', 'edit']" v-if="isEditing === false" @click="editRecords()" />
                         </td>
-                        <td class="border p-2 md:px-8 md:py-4">
+                        <td class="border p-2 md:px-8 md:py-4 break-words">
                             <span v-if="isEditing === false"> Name </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" id="" v-if="isEditing">
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                type="text" name="" id="" autocomplete="off" v-if="isEditing" />
                         </td>
-                        <td class="border p-2 md:px-8 md:py-4">
+                        <td class="border p-2 md:px-8 md:py-4 break-words">
                             <span v-if="isEditing === false"> 12/12/2020 </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" id="" v-if="isEditing">
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                type="text" name="" autocomplete="off" id="" v-if="isEditing" />
                         </td>
-                        <td class="border p-2 md:px-8 md:py-4">
+                        <td class="border p-2 md:px-8 md:py-4 break-words">
                             <span v-if="isEditing === false"> Active </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium text-purple-700 transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" id="" v-if="isEditing">
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                type="text" name="" id="" autocomplete="off" v-if="isEditing" />
                         </td>
                     </tr>
                 </table>
@@ -102,9 +122,12 @@
                     </button>
                 </div>
 
-                <div class="confirm-delete-modal-overlay bg-purple-100" v-if="confirmDeletePopUp" @click="cancelDelete()">
-                    <div class="confirm-delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="confirmDeletePopUp">
-                        <p class="p-4 md:p-10 text-lg md:text-3xl text-center text-red-500"> Are you sure you want to delete (name) from Category? </p>
+                <div class="fixed top-0 bottom-0 right-0 left-0 bg-purple-100 z-50" v-if="confirmDeletePopUp" @click="cancelDelete()">
+                    <div class="fixed top-64 sm:top-56 md:top-52 left-20 sm:left-56 md:left-96 pb-6 md:pb-12 text-xs sm:text-base group shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none"
+                        v-if="confirmDeletePopUp">
+                        <p class="p-4 md:p-10 text-lg md:text-3xl text-center text-red-500">
+                            Are you sure you want to delete (name) from Category?
+                        </p>
                         <div class="flex place-content-center pb-4 md:pb-12 space-x-6">
                             <button
                                 class="border border-red-700 px-2 md:px-4 py-1 md:py-2 rounded-full font-medium md:text-lg text-red-700 transition duration-1500 ease-in-out hover:bg-red-700 hover:text-white focus:outline-none"
@@ -113,7 +136,7 @@
                                 Confirm
                             </button>
                             <button
-                                class="border border-purple-700 px-5 py-2 rounded-full font-medium text-lg text-purple-700 transition duration-1500 ease-in-out hover:bg-purple-700 hover:text-white focus:outline-none"
+                                class="border border-purple-700 px-5 py-2 rounded-full font-medium text-lg transition duration-1500 ease-in-out hover:bg-purple-700 hover:text-white focus:outline-none"
                                 @click="cancelDelete()">
                                 <font-awesome-icon :icon="['fas', 'backspace']" />
                                 Cancel
@@ -122,20 +145,26 @@
                     </div>
                 </div>
 
-                <div class="delete-modal-overlay bg-purple-100" v-if="deleteRecordPopUp" @click="closeDeletePopUp()">
-                    <div class="delete-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl" v-if="deleteRecordPopUp">
+                <div class="fixed top-0 bottom-0 right-0 left-0 bg-purple-100 z-50" v-if="deleteRecordPopUp" @click="closeDeletePopUp()">
+                    <div class="fixed top-64 sm:top-56 md:top-52 left-20 sm:left-56 md:left-96 pb-6 md:pb-12 text-xs sm:text-base group shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none"
+                        v-if="deleteRecordPopUp">
                         <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']" @click="closeDeletePopUp()" />
 
-                        <p class="p-2 md:p-10 text-lg md:text-3xl text-center text-red-500"> (name) is successfully deleted from Category. </p>
+                        <p class="p-2 md:p-10 md:text-3xl text-center text-red-500">
+                            (name) is successfully deleted from Category.
+                        </p>
                     </div>
                 </div>
 
-                <div class="modification-modal-overlay bg-purple-100" v-if="modificationPopUp" @click="closeModificationPopUp()">
-                    <div class="modification-modal group m-4 md:m-12 bg-white shadow-2xl rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl border" v-if="modificationPopUp">
-                        <font-awesome-icon class="text-red-500 text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
+                <div class="fixed top-0 bottom-0 right-0 left-0 bg-purple-100 z-50" v-if="modificationPopUp" @click="closeModificationPopUp()">
+                    <div class="fixed top-64 sm:top-56 md:top-52 left-20 sm:left-56 md:left-96 pb-6 md:pb-12 text-xs sm:text-base group shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none"
+                        v-if="modificationPopUp">
+                        <font-awesome-icon class="text-red-500 text-xl md:text-5xl right-0 opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'times-circle']"
                             @click="closeModificationPopUp()" />
 
-                        <p class="p-2 md:p-10 text-lg md:text-3xl text-center text-purple-700"> Modification implemented successfully. </p>
+                        <p class="p-2 md:p-10 md:text-3xl text-center text-purple-700">
+                            Modification implemented successfully.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -144,7 +173,11 @@
 </template>
 
 <script>
-    import theShortcuts from "../../components/theShortcuts"
+    import {
+        mapState
+    } from "vuex";
+
+    import theShortcuts from "../../components/theShortcuts";
 
     export default {
         components: {
@@ -154,12 +187,14 @@
         data: function () {
             return {
                 category: {
-                    name: ''
+                    name: "",
                 },
 
-                categories: [],
+                // categories: [],
 
-                formStage: 'previewRecords',
+                fieldError: false,
+
+                formStage: "previewRecords",
                 // isPreviewing: false,
                 isEditing: false,
                 isDeleting: false,
@@ -167,73 +202,46 @@
                 modificationPopUp: false,
                 deleteRecordPopUp: false,
                 confirmDeletePopUp: false,
-            }
+            };
         },
 
         methods: {
-            addItems() {
-                if (this.category.name === '') {
+            // fieldError() {
+            //     this.fieldError = true;
+            // },
+
+            addNewRecord() {
+                if (this.category.name === "") {
+                    this.fieldError = true;
                     return;
                 }
 
-                axios.post('api/category/store', {
-                        category: this.category
+                axios
+                    .post("/api/category/store", {
+                        category: this.category,
                     })
-                    .then(response => {
+                    .then((response) => {
                         if (response.status === 201) {
                             this.category.name = "";
-                            // this.$emit('reloadlist');
                         }
                     })
-                    .catch(error => {
+                    .catch((error) => {
                         console.log(error.message);
-                    })
+                    });
+
+                this.addRecordPopUp = true;
             },
 
-            // getList() {
-            //     axios.get('api/items')
-            //     .then( response => {
-            //         this.items = response.data
-            //     })
-            //     .catch (error => {
-            //         console.log(error.message);
-            //     });
-            // },
-
-            getRecord() {
-                axios.get('api/categories')
-                    .then(response => {
-                        this.categories = response.data;
-                    })
-                    .catch(error => {
-                        console.log(error.message);
-                    })
-            },
-
-            // addNewRecord() {
-            //     if (this.category.name === '') {
-            //         return;
-            //     }
-                
-            //     console.log("Sent");
-            //     axios.post('/api/category/store', {
-            //             category: this.category
+            // getRecords() {
+            //     axios
+            //         .get("/api/categories")
+            //         .then((response) => {
+            //             this.categories = response.data;
+            //             console.log(response.data);
             //         })
-            //         .then(response => {
-            //             if (response.status === 201) {
-            //                 this.category.name = "";
-                            // this.$emit('reloadlist');
-                    //     }
-                    // })
-                    // .catch(error => {
-                    //     console.log(error.message);
-                    // })
-                // this.addRecordPopUp = true;
-
-//                     axios.post('/api/task',{title:this.title})
-// .then((res) => console.log(res.data))
-// .catch((err) => console.log(err));
-                // this.addRecordPopUp = true;
+            //         .catch((error) => {
+            //             console.log(error.message);
+            //         });
             // },
 
             closeModificationPopUp() {
@@ -254,21 +262,22 @@
             },
 
             updateRecord() {
-                if (this.category.name === '') {
+                if (this.category.name === "") {
                     return;
                 }
 
-                axios.put('api/category/' + this.category.id, {
-                        category: this.category
+                axios
+                    .put("api/category/" + this.category.id, {
+                        category: this.category,
                     })
-                    .then(response => {
+                    .then((response) => {
                         if (response.status === 200) {
-                            this.category.name === ''
+                            this.category.name === "";
                         }
                     })
-                    .catch(error => {
+                    .catch((error) => {
                         console.log(error);
-                    })
+                    });
 
                 // this.addRecordPopUp = true;
             },
@@ -278,7 +287,7 @@
             },
 
             editDeleteRecords() {
-                this.formStage = 'editDeleteRecords';
+                this.formStage = "editDeleteRecords";
             },
 
             openDeletePopUp() {
@@ -305,48 +314,38 @@
                 this.deleteRecordPopUp = false;
                 this.isEditing = false;
                 this.isDeleting = false;
-            }
+            },
         },
 
-        created() {
-            this.getRecord();
-        }
+        computed: {
+            // fieldError() {
+            //     return this.fieldError
+            // },
 
-    }
+            existingRecord() {
+                return this.existingRecord;
+            },
+
+            // titles() {
+            //         return this.$store.state.samples;
+            //     // console.log('Hello')
+            //     // return "Hello"
+            // },
+
+            ...mapState({
+                titles: "samples",
+                categories: "categories"
+            }),
+        },
+
+        mounted() {
+            this.$store.dispatch('getCategories')
+            // this.getRecords();
+            // this.$store.dispatch('loadPosts')
+        },
+    };
 
 </script>
 
 <style scoped>
-    .add-modal,
-    .confirm-delete-modal,
-    .delete-modal,
-    .modification-modal {
-        position: fixed;
-        left: 50%;
-        top: 40%;
-        transform: translate(-50%, -50%);
-        box-shadow:
-            0 2.8px 2.2px rgba(0, 0, 0, 0.034),
-            0 6.7px 5.3px rgba(0, 0, 0, 0.048),
-            0 12.5px 10px rgba(0, 0, 0, 0.06),
-            0 22.3px 17.9px rgba(0, 0, 0, 0.072);
-        filter: none;
-        z-index: 1111;
-    }
-
-    .add-modal-overlay,
-    .confirm-delete-modal-overlay,
-    .delete-modal-overlay,
-    .modification-modal-overlay {
-        position: fixed;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        /* background-color: rgba(0, 0, 0, 0.4); */
-        z-index: 999;
-    }
-
 </style>

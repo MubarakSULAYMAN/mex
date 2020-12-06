@@ -1,10 +1,12 @@
 require('./bootstrap');
 
-import Vue from 'vue'
-import App from './vue/app'
+import Vue from 'vue';
+import App from './vue/app';
 import router from './vue/router';
+import Vuex from 'vuex';
+import store from './vue/store';
 
-import 'remixicon/fonts/remixicon.css'
+import 'remixicon/fonts/remixicon.css';
 
 import {
     library
@@ -31,6 +33,8 @@ library.add(faFolderPlus, faHighlighter, faFileInvoice, faEdit, faBackspace, faS
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
+Vue.use(Vuex)
+
 Vue.config.productionTip = false
 
 const app = new Vue({
@@ -39,11 +43,12 @@ const app = new Vue({
         App
     },
     router,
-    methods: {
-        goTo(route) {
-            this.$router.push(route);
-        }
-    }
+    store,
+    // methods: {
+    //     goTo(route) {
+    //         this.$router.push(route);
+    //     }
+    // }
 });
 
 // Vue.config.productionTip = false

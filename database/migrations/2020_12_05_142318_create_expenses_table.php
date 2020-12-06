@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateCategoriesTable extends Migration
+class CreateExpensesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,14 @@ class CreateCategoriesTable extends Migration
      */
     public function up()
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('expenses', function (Blueprint $table) {
+            Schema::enableForeignKeyConstraints();
+            
             $table->id();
-            $table->string('name');
-            // $table->integer('times_selected')->default(0);
-            $table->boolean('active')
-                    ->default(false);
+            $table->text('narration');
+            $table->foreignId('category')
+                    ->constrained('categories');
+            $table->string('amount');
             $table->timestamps();
         });
     }
@@ -30,6 +32,6 @@ class CreateCategoriesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('expenses');
     }
 }

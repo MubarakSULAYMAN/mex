@@ -3,9 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Category;
 
-class CategoryController extends Controller
+class ExpensesController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -14,8 +13,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // return Category::all();
-        return Category::orderBy('created_at', 'DESC')->get();
+        //
     }
 
     /**
@@ -36,11 +34,7 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        $newCategory = new Category;
-        $newCategory->name = $request->category["name"];
-        $newCategory->save();
-
-        return $newCategory;
+        //
     }
 
     /**
@@ -74,10 +68,7 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $existingCategory = Category::find($id);
-        // if ($existingCategory) {
-        //     $existingItem->
-        // }
+        //
     }
 
     /**
@@ -88,13 +79,6 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        $existingCategory = Category::find($id);
-
-        if ($existingCategory) {
-            $existingCategory->delete();
-            return "Category successfully deleted.";
-        }
-
-        return "Category not found.";
+        //
     }
 }
