@@ -15,7 +15,8 @@ class CategoryController extends Controller
     public function index()
     {
         // return Category::all();
-        return Category::orderBy('created_at', 'DESC')->get();
+        // return Category::orderBy('created_at', 'DESC')->get();
+        return Category::orderBy('name')->get();
     }
 
     /**
@@ -74,10 +75,20 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        // $existingCategory = Category::find($id);
-        // if ($existingCategory) {
-        //     $existingItem->
-        // }
+        $existingCategory = Category::find($id);
+
+        if ($existingCategory) {
+            
+        $existingCategory->narration = $request->get('narration');
+        $existingCategory->category = $request->get('category');
+        $existingCategory->amount = $request->get('amount');
+        $existingCategory->date = $request->get('date');
+        $existingCategory->save();
+
+        return $existingCategory;
+        }
+
+        return "No result found.";
     }
 
     /**
@@ -95,6 +106,6 @@ class CategoryController extends Controller
             return "Category successfully deleted.";
         }
 
-        return "Category not found.";
+        return "Record not found.";
     }
 }

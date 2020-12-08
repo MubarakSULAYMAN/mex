@@ -1,5 +1,7 @@
 <template>
     <div>
+        <the-shortcuts />
+
         <div class="message">
             <p class="text-left"> Dear Explorer, </p>
             <p class="text-left"> Navigation is quite easier with our navigation options. Kindly consider that. </p>
@@ -9,10 +11,12 @@
 </template>
 
 <script>
+    import theShortcuts from "../components/theShortcuts"
+
     export default {
-        data() {
-            return {}
-        }
+        components: {
+            theShortcuts,
+        },
     }
 
 </script>

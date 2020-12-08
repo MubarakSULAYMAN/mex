@@ -1,47 +1,60 @@
-import vue from 'vue'
-import vuex from 'vuex'
 import Vue from 'vue';
+import vuex from 'vuex'
 import axios from 'axios';
 
 Vue.use(vuex)
 
 export default new vuex.Store({
     state: {
-        samples: [{
-                title: 'Hello 1',
-            },
-            {
-                title: 'Hello 2',
-            },
-            {
-                title: 'Hello 3',
-            },
-            {
-                title: 'Hello 4',
-            }
-        ],
+        // queryResult: null,
+        loading: true,
 
-        categories: []
+        categories: [],
+        expenses: [],
     },
 
     mutations: {
-        NEW_TITLE(state, newTitle) {
-            state.samples.push({
-                title: newTitle
-            });
+        // LOAD_QUERY_RESULT(state, queryResult) {
+        //     state.queryResult = queryResult
+        // },
+
+        CHANGE_LOADING_STATE(state, loading) {
+            state.loading = loading
         },
 
-        SET_CATEGORIES (state, categories) {
+        // NEW_TITLE(state, newTitle) {
+        //     state.samples.push({
+        //         title: newTitle
+        //     });
+        // },
+
+        SET_CATEGORIES(state, categories) {
             state.categories = categories
-          }
+        },
+
+        SET_EXPENSES(state, expenses) {
+            state.expenses = expenses
+        }
     },
 
     actions: {
-        addNewTitle({
+        // loadQueryResult({
+        //     commit
+        // }, queryResult) {
+        //     commit('LOAD_QUERY_RESULT', queryResult)
+        // },
+
+        setLoading({
             commit
-        }, newTitle) {
-            commit('NEW_TITLE', newTitle)
+        }, loading) {
+            commit('CHANGE_LOADING_STATE', loading)
         },
+
+        // addNewTitle({
+        //     commit
+        // }, newTitle) {
+        //     commit('NEW_TITLE', newTitle)
+        // },
 
         getCategories({
             commit
@@ -52,8 +65,22 @@ export default new vuex.Store({
                 .then(categories => {
                     commit('SET_CATEGORIES', categories)
                 })
+        },
+
+        getExpenses({
+            commit
+        }) {
+            axios
+                .get('/api/expenses')
+                .then(response => response.data)
+                .then(expenses => {
+                    commit('SET_EXPENSES', expenses)
+                })
         }
     },
 
-    getters: {}
+    getters: {
+        queryResult: (state) => state.queryResult,
+        loading: (state) => state.loading
+    }
 })

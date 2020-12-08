@@ -18,9 +18,13 @@ class CreateExpensesTable extends Migration
             
             $table->id();
             $table->text('narration');
-            $table->foreignId('category')
-                    ->constrained('categories');
+            // $table->string('category');
+            $table->foreignId('category_id')
+                    ->constrained()
+                    ->onUpdate('cascade')
+                    ->onDelete('cascade');                    
             $table->string('amount');
+            $table->string('date');
             $table->timestamps();
         });
     }

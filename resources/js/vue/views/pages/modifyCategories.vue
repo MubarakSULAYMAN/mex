@@ -15,6 +15,12 @@
                         <div class="mt-2 text-xs text-red-700 font-medium" v-if="fieldError">
                             You cannot add an empty field.
                         </div>
+                        <div class="mt-2 text-xs text-red-700 font-medium" v-if="noInternetConnection">
+                            Your internet is not connected.
+                        </div>
+                        <!-- <div class="mt-2 text-xs text-red-700 font-medium" v-if="isOffline">
+                            Unable to complete your request, internet not responding.
+                        </div> -->
                     </span>
                     <div class="">
                         <button
@@ -40,29 +46,35 @@
                 </div>
             </div>
 
-            <p class="group font-light md:text-xl mt-4 md:mt-12 inline-block">
-                Modify records as you wish.
-                <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span>
-            </p>
+            <div v-if="categories.length > 0">
+                <p class="group font-light md:text-xl mt-4 md:mt-12 inline-block">
+                    Modify records as you wish.
+                    <span class="text-xs font-light md:font-medium opacity-0 group-hover:opacity-100">Click highlighter icon to proceed.</span>
+                </p>
 
-            <table class="md:w-full table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
-                <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="w-1/12 p-2 md:px-8 md:py-4">S/N</th>
-                    <th class="w-1/2 p-2 md:px-8 md:py-4">Category Name</th>
-                    <th class="w-1/5 p-2 md:px-8 md:py-4">Date Created</th>
-                    <th class="w-1/5 p-2 md:px-8 md:py-4">Status</th>
-                </tr>
-                <tr class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
-                    v-for="(item, index) in categories" :key="index">
-                    <td class="border px-4 py-4 break-words">
-                        {{ ++index }}
-                        <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
-                    </td>
-                    <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.name }}</td>
-                    <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.created_at }}</td>
-                    <td class="border p-2 md:px-8 md:py-4 break-words">Active</td>
-                </tr>
-            </table>
+                <table class=" md:w-full table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal mb-36">
+                    <tr class="bg-purple-700 border border-collapse text-white text-center">
+                        <th class="w-1/12 p-2 md:px-8 md:py-4">S/N</th>
+                        <th class="w-1/2 p-2 md:px-8 md:py-4">Category Name</th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4">Date Created</th>
+                        <th class="w-1/5 p-2 md:px-8 md:py-4">Status</th>
+                    </tr>
+                    <tr class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
+                        v-for="(item, index) in categories" :key="index">
+                        <td class="border px-4 py-4 break-words">
+                            {{ ++index }}
+                            <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
+                        </td>
+                        <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.name }}</td>
+                        <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.updated_at | formatDate }}</td>
+                        <td class="border p-2 md:px-8 md:py-4 break-words">Active</td>
+                    </tr>
+                </table>
+            </div>
+
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available
+            </div>
         </section>
 
         <section v-if="formStage === 'editDeleteRecords'">
@@ -71,40 +83,44 @@
                     You can only edit and delete here.
                     <span class="text-xs font-medium opacity-0 group-hover:opacity-100">Click on trash icon to delete or pen-on-note to edit.</span>
                 </p>
-                <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
+                <table class="table-fixed md:w-full shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal mb-36" v-if="categories.length > 0">
                     <tr class="bg-purple-700 border border-collapse text-white text-center">
                         <th class="w-1/12 p-2 md:px-8 md:py-4">S/N</th>
                         <th class="w-1/2 p-2 md:px-8 md:py-4">Category Name</th>
                         <th class="w-1/5 p-2 md:px-8 md:py-4">Date Created</th>
                         <th class="w-1/5 p-2 md:px-8 md:py-4">Status</th>
                     </tr>
-                    <tr
-                        class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
+                    <tr class="group border border-collapse even:border-purple-700 font-normal md:font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
+                        v-for="(item, index) in categories" :key="index">
                         <td class="border px-4 py-4 break-words">
-                            <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="openDeletePopUp()" />
-                            1
+                            <!-- <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="openDeletePopUp()" /> -->
+                            <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-red-700" :icon="['fas', 'trash']" v-if="isDeleting === false" @click="deleteRecord()" />
+                            {{ ++index }}
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-pink-700" :icon="['fas', 'edit']" v-if="isEditing === false" @click="editRecords()" />
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">
-                            <span v-if="isEditing === false"> Name </span>
+                            <span v-if="isEditing === false"> {{ item.name }} </span>
                             <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" id="" autocomplete="off" v-if="isEditing" />
+                                type="text" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.name" />
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">
-                            <span v-if="isEditing === false"> 12/12/2020 </span>
-                            <input
+                            <span> {{ item.updated_at | formatDate }} </span>
+                            <!-- <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" autocomplete="off" id="" v-if="isEditing" />
+                                type="text" name="" autocomplete="off" id="" v-if="isEditing" /> -->
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">
-                            <span v-if="isEditing === false"> Active </span>
-                            <input
+                            <span> Active </span>
+                            <!-- <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="text" name="" id="" autocomplete="off" v-if="isEditing" />
+                                type="text" name="" id="" autocomplete="off" v-if="isEditing" /> -->
                         </td>
                     </tr>
                 </table>
+
+                <div class="p-6 text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
+                <div class="p-6 text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
 
                 <div class="fixed bottom-5 md:bottom-10 right-5 md:right-10 space-x-6 z-50">
                     <button
@@ -186,6 +202,8 @@
 
         data: function () {
             return {
+                loading: false,
+
                 category: {
                     name: "",
                 },
@@ -193,6 +211,7 @@
                 // categories: [],
 
                 fieldError: false,
+                noInternetConnection: false,
 
                 formStage: "previewRecords",
                 // isPreviewing: false,
@@ -214,22 +233,33 @@
                 if (this.category.name === "") {
                     this.fieldError = true;
                     return;
+                } else if (!navigator.onLine) {
+                    this.noInternetConnection = true;
+                    return;
                 }
+                // else if (isOffline) {
+                //     this.offlineError = true;
+                //     return;
+                // }
+
+                this.fieldError = false;
+                this.noInternetConnection = false;
 
                 axios
                     .post("/api/category/store", {
-                        category: this.category,
+                        category: this.category
                     })
                     .then((response) => {
                         if (response.status === 201) {
-                            this.category.name = "";
+                            this.$store.dispatch('getCategories')
+                            // this.category.name = "";
+                            this.addRecordPopUp = true;
+                            // console.log(response)
                         }
                     })
                     .catch((error) => {
                         console.log(error.message);
                     });
-
-                this.addRecordPopUp = true;
             },
 
             // getRecords() {
@@ -244,18 +274,48 @@
             //         });
             // },
 
+            deleteRecord() {
+                this.confirmDeletePopUp = true;
+
+                if (!this.confirmDelete) {
+                    return
+                } else if (!navigator.onLine) {
+                    console.log("You do not have an internet connection.")
+                    return;
+                }
+                // else if (isOffline) {
+                //     console.log("Unable to complete your request, internet not responding.")
+                //     return;
+                // }
+
+                axios
+                    .delete('/api/category/' + this.category.id)
+                    .then(response => {
+                        if (response.status === 200) {
+                            this.$store.dispatch('getCategories')
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error.message);
+                        console.log('Problem in deleting the record.');
+                    })
+            },
+
             closeModificationPopUp() {
+                // this.$store.dispatch('getCategories')
                 this.modificationPopUp = false;
                 this.isEditing = false;
                 this.isDeleting = false;
             },
 
             confirmDelete() {
+                // this.$store.dispatch('getCategories')
                 this.confirmDeletePopUp = false;
                 this.deleteRecordPopUp = true;
             },
 
             cancelDelete() {
+                // this.$store.dispatch('getCategories')
                 this.confirmDeletePopUp = false;
                 this.isEditing = false;
                 this.isDeleting = false;
@@ -264,19 +324,26 @@
             updateRecord() {
                 if (this.category.name === "") {
                     return;
+                } else if (noInternetConnection) {
+                    console.log("You do not have an internet connection.")
+                    return;
                 }
+                // else if (isOffline) {
+                //     console.log("Unable to complete your request, internet not responding.")
+                //     return;
+                // }
 
                 axios
-                    .put("api/category/" + this.category.id, {
-                        category: this.category,
-                    })
+                    .put("api/category/" + this.category.id)
                     .then((response) => {
                         if (response.status === 200) {
+                            this.$store.dispatch('getCategories')
                             this.category.name === "";
                         }
                     })
                     .catch((error) => {
-                        console.log(error);
+                        console.log(error.message);
+                        console.log("Problem in updating the records.");
                     });
 
                 // this.addRecordPopUp = true;
@@ -284,17 +351,18 @@
 
             closeNewRecordPopUp() {
                 this.addRecordPopUp = false;
+                this.category.name = "";
             },
 
             editDeleteRecords() {
                 this.formStage = "editDeleteRecords";
             },
 
-            openDeletePopUp() {
-                this.confirmDeletePopUp = true;
-                // this.isEditing = true;
-                // this.isDeleting = true;
-            },
+            // openDeletePopUp() {
+            //     this.confirmDeletePopUp = true;
+            // this.isEditing = true;
+            // this.isDeleting = true;
+            // },
 
             editRecords() {
                 this.isEditing = true;
@@ -322,9 +390,9 @@
             //     return this.fieldError
             // },
 
-            existingRecord() {
-                return this.existingRecord;
-            },
+            // existingRecord() {
+            //     return this.existingRecord;
+            // },
 
             // titles() {
             //         return this.$store.state.samples;

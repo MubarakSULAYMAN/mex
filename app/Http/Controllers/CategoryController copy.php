@@ -83,7 +83,7 @@ class ItemController extends Controller
             return $existingItem;
         }
 
-        return "Item not found";
+        return "No result found.";
     }
 
     /**
@@ -101,6 +101,6 @@ class ItemController extends Controller
             return "Item successfully deleted.";
         }
 
-        return "Item not found";
+        return "No result found.";
     }
 }

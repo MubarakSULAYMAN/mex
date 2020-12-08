@@ -41,3 +41,5 @@ Route::prefix('/expense')->group( function() {
     Route::put('/{id}', [ExpenseController::class, 'update']);
     Route::delete('{id}', [ExpenseController::class, 'destroy']);
 });
+
+Route::get('/get-expenses/{id}', [CategoryController::class, 'getExpensesByCategory']);

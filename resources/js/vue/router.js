@@ -41,7 +41,7 @@ const router = new VueRouter({
         },
         {
           path: '/expenses/modify',
-          name: 'ModifyCategories',
+          name: 'ModifyExpenses',
           component: () => import('./views/pages/modifyExpenses.vue')
         },
         {

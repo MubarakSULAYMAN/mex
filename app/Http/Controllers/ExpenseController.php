@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Expense;
 use Illuminate\Http\Request;
+use App\Models\Expense;
 
-class ExpensesController extends Controller
+class ExpenseController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -15,7 +15,8 @@ class ExpensesController extends Controller
     public function index()
     {
         // return Expense::all();
-        return Expense::orderBy('created_at', 'DESC')->get();
+        // return Expense::orderBy('created_at', 'DESC')->get();
+        return Expense::latest()->get();
     }
 
     /**
@@ -36,14 +37,11 @@ class ExpensesController extends Controller
      */
     public function store(Request $request)
     {
-        $newCategory = new Category;
-        $newCategory->narration = $request->category["narration"];
-        $newCategory->category = $request->category["category"];
-        $newCategory->amount = $request->category["amount"];
-        $newCategory->date = $request->category["date"];
-        $newCategory->save();
+        $newExpense = new Expense;
+        $newExpense = Expense::create($request->all());
+        $newExpense->save();
 
-        return $newCategory;
+        return $newExpense;
     }
 
     /**

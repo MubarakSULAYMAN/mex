@@ -13,6 +13,7 @@
         <button @click="addNewTitleItem(newTitle)">Submit</button> -->
 
         <div class="p-4 md:p-12">
+            <div v-if="categories.length > 0">
             <p class="group font-light md:text-xl inline-block"> Here are the existing records. <span class="text-xs font-normal md:font-medium opacity-0 group-hover:opacity-100">Click the button
                     below to modify.</span> </p>
             <table class="w-full table-fixed shadow-lg bg-white border-collapse border hover:border-purple-700 text-xs md:text-base md:font-normal">
@@ -27,10 +28,14 @@
                     <td class="border p-2 md:px-8 md:py-4 break-words"> {{ ++index }}
                     </td>
                     <td class="border p-2 md:px-8 md:py-4 break-words"> {{ item.name }} </td>
-                    <td class="border p-2 md:px-8 md:py-4 break-words"> {{ item.created_at }} </td>
+                    <td class="border p-2 md:px-8 md:py-4 break-words"> {{ item.updated_at | formatDate }} </td>
                     <td class="border p-2 md:px-8 md:py-4 break-words"> Active </td>
                 </tr>
             </table>
+            </div>
+            
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
         </div>
     </div>
 </template>
@@ -40,7 +45,7 @@
         mapState,
         mapActions
     } from "vuex";
-    
+
     import theShortcuts from "../../components/theShortcuts"
 
     export default {
@@ -50,7 +55,7 @@
 
         data() {
             return {
-                newTitle: ''
+                loading: false
             }
         },
 
@@ -61,9 +66,9 @@
             // addNewTitleItem() {
             //     this.$store.dispatch('addNewTitle', this.newTitle)
             // },
-            ...mapActions({
-                addNewTitleItem: 'addNewTitle'
-            })
+            // ...mapActions({
+            //     addNewTitleItem: 'addNewTitle'
+            // })
         },
 
         computed: {
