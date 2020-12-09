@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
+
 use Illuminate\Http\Request;
 use App\Models\Expense;
+use App\Models\Category;
 
 class ExpenseController extends Controller
 {
@@ -16,7 +19,11 @@ class ExpenseController extends Controller
     {
         // return Expense::all();
         // return Expense::orderBy('created_at', 'DESC')->get();
-        return Expense::latest()->get();
+        // return Expense::latest()->get();
+        // return Expense::with('expenses', 'category')->get();
+        return Expense::with('category')->get();
+
+        // return Expense::with('expenses', 'category')->get();
     }
 
     /**
@@ -39,6 +46,13 @@ class ExpenseController extends Controller
     {
         $newExpense = new Expense;
         $newExpense = Expense::create($request->all());
+
+        // error_log($newExpense);
+        // LOG::info($newExpense);
+        // LOG::debug($newExpense);
+
+        // dd($request->all());
+
         $newExpense->save();
 
         return $newExpense;
@@ -94,5 +108,32 @@ class ExpenseController extends Controller
         }
 
         return "Record not found.";
+    }
+
+    public function groupedByCategory() {
+        $byGroup = Expense::groupBy('category_id', 'id')->get();
+        // return Expense::with('category')->get();
+        return $byGroup;
+    }
+
+    public function groupedByMonth() {
+        // $byMonth = Expense::groupBy('category_id')->get();
+        // return $byMonth;
+        
+        // $bymonth = Expense::groupBy(function($d) {
+        //     return Carbon::parse($d->date)->format('Y', 'm');
+        // })->get();
+        // return Expense::select('category_id', 'amount', 'date')
+        return Expense::select('*')
+        ->get()
+        ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('Y-m'); // grouping by years and its month
+        });
+
+        // return $byMonth;
+
+        // $months = NewsItem::get()->groupBy(function($d) {
+        //     return Carbon::parse($d->created_at)->format('m');
+        // });
     }
 }

@@ -3,7 +3,7 @@
         <the-shortcuts />
 
         <button
-            class="fixed bottom-10 sm:bottom-12 md:bottom-20 -right-6 sm:-right-8 md:-right-8 py-1 md:py-2 px-3 md:px-6 rounded-md text-white font-light sm:text-xl md:text-2xl bg-purple-700 rotate-90 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 md:hover:rotate-0 md:hover:-translate-x-12 md:hover:translate-y-16 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100 z-50"
+            class="fixed bottom-10 sm:bottom-12 md:bottom-20 -right-6 sm:-right-8 md:-right-8 py-1 md:py-2 px-3 md:px-6 rounded-md text-white font-light sm:text-xl md:text-2xl bg-purple-700 rotate-90 transform transition duration-200 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 md:hover:rotate-0 md:hover:-translate-x-12 md:hover:translate-y-16 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100 z-50"
             @click="goTo('categories/modify')">
             <font-awesome-icon class="hover:text-yellow-700 mr-2" :icon="['fas', 'file-invoice']" />
             Modify
@@ -35,7 +35,7 @@
             </div>
             
             <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
-            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
         </div>
     </div>
 </template>

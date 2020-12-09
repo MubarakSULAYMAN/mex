@@ -22,13 +22,12 @@
                         <td class="border p-1 md:px-8 md:py-4">
                             <select
                                 class="w-full p-1 md:p-2 text-purple-700 bg-white border-2 border-purple-700 rounded-md md:font-medium inline-flex items-center transform transition duration-1000 ease-in-out hover:border-transparent hover:shadow-lg focus:outline-none focus:ring-0 focus:ring-purple-500"
-                                v-model="expense.category_id">
-                                <!-- selection -->
+                                v-model.trim="expense.category">
                                 <option
                                     class="rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-300 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap"
                                     disabled value="">Please select an option</option>
                                 <option
-                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap" v-for="(item, index) in categories" :key="index" :value="item.id">
+                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap" v-for="(item, index) in categories" :key="index" :value="index">
                                     {{ item.name }}</option>
                             </select>
                         </td>
@@ -44,9 +43,6 @@
                         </td>
                     </tr>
                 </table>
-
-                <!-- {{selection}} -->
-                {{expense.category_id}}
                 <div class="mt-2 text-xs text-red-700 font-medium" v-if="fieldError">
                     You cannot add an empty field, all fields are required.
                 </div>
@@ -96,7 +92,7 @@
                             <font-awesome-icon class="opacity-0 group-hover:opacity-100 hover:text-blue-700" :icon="['fas', 'highlighter']" @click="editDeleteRecords()" />
                         </td>
                         <td class="border p-1 md:px-8 md:py-4"> {{ item.narration }} </td>
-                        <td class="border p-1 md:px-8 md:py-4"> {{ item.category.name }} </td>
+                        <td class="border p-1 md:px-8 md:py-4"> {{ item.category_id }} </td>
                         <td class="border p-1 md:px-8 md:py-4"> ₦{{ item.amount }} </td>
                         <td class="border p-1 md:px-8 md:py-4"> {{ item.date | formatDate }} </td>
                     </tr>
@@ -134,7 +130,7 @@
                                 type="text" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.narration">
                         </td>
                         <td class="border p-1 md:px-8 md:py-4">
-                            <span v-if="isEditing === false"> {{ item.category.name }} </span>
+                            <span v-if="isEditing === false"> {{ item.category_id }} </span>
                             <select
                                 class="w-full p-2 text-purple-700 bg-white border-2 border-transparent shadow-lg rounded-md md:font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 v-if="isEditing">
@@ -239,12 +235,11 @@
 
         data: function () {
             return {
-                selection: '',
                 loading: false,
 
                 expense: {
                     narration: "",
-                    category_id: "",
+                    category: "",
                     amount: "",
                     date: ""
                 },
@@ -297,16 +292,11 @@
                 this.noInternetConnection = false;
                 // console.log("Sending...");
 
-                console.log(this.expense.narration);
-                    console.log(this.expense.category_id);
-                    console.log(this.expense.amount);
-                    console.log(this.expense.date);
-
                 axios
                     .post("/api/expense/store", {
                         // expense: this.expense
                         narration: this.expense.narration,
-                        category_id: this.expense.category_id,
+                        category: this.expense.category_id,
                         amount: this.expense.amount,
                         date: this.expense.date
                     })

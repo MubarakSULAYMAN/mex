@@ -15,12 +15,13 @@
 
             <button
                 class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:-translate-x-2 md:hover:-translate-x-4 hover:translate-y-2 md:hover:translate-y-4  hover:skew-x-3 hover:skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
-                @click="goTo('expenses-summary')"> Expenses Summary
+                @click="goTo('expenses-summary')"> Summary <br> <span class="text-lg"> (Expenses by Category)</span>
             </button>
 
             <button
                 class="bg-purple-700 box-border h-48 w-100 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-2xl hover:text-purple-700 hover:translate-x-2 md:hover:translate-x-4 hover:translate-y-2 md:hover:translate-y-4 hover:-skew-x-3 hover:-skew-y-3 focus:ring-4 md:focus:ring-8 focus:ring-purple-700 focus:outline-none"
-                @click="goTo('expenses-report')"> Expenses Report </button>
+                @click="goTo('expenses-report')"> Report <br> <span class="text-lg"> (Monthly Expenses)</span>
+            </button>
         </div>
     </div>
 </template>

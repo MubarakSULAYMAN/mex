@@ -33,6 +33,8 @@ Route::prefix('/category')->group( function() {
     Route::post('/store', [CategoryController::class, 'store']);
     Route::put('/{id}', [CategoryController::class, 'update']);
     Route::delete('{id}', [CategoryController::class, 'destroy']);
+    Route::get('/with-expense', [CategoryController::class, 'getWithExpense']);
+
 });
 
 Route::get('expenses', [ExpenseController::class, 'index']);
@@ -40,6 +42,11 @@ Route::prefix('/expense')->group( function() {
     Route::post('/store', [ExpenseController::class, 'store']);
     Route::put('/{id}', [ExpenseController::class, 'update']);
     Route::delete('{id}', [ExpenseController::class, 'destroy']);
+
+    Route::prefix('/group')->group( function() {
+        Route::get('/by-category', [ExpenseController::class, 'groupedByCategory']);
+        Route::get('/by-month', [ExpenseController::class, 'groupedByMonth']);
+    });
 });
 
-Route::get('/get-expenses/{id}', [CategoryController::class, 'getExpensesByCategory']);
+// Route::get('/expenses-group/{id}', [CategoryController::class, 'getExpensesByCategory']);

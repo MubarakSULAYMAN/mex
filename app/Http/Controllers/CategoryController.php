@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\Expense;
 
 class CategoryController extends Controller
 {
@@ -16,7 +17,10 @@ class CategoryController extends Controller
     {
         // return Category::all();
         // return Category::orderBy('created_at', 'DESC')->get();
-        return Category::orderBy('name')->get();
+        // return Category::orderBy('name')->get();
+        return Category::with('expenses')->get();
+        // return category::query()->with('expenses')->has('expenses')->get()
+        // Category::has('expenses')->get();
     }
 
     /**
@@ -107,5 +111,10 @@ class CategoryController extends Controller
         }
 
         return "Record not found.";
+    }
+
+    public function getWithExpense() {
+        $withExpense = Category::has('expenses')->get();
+        return $withExpense;
     }
 }
