@@ -111,29 +111,29 @@ class ExpenseController extends Controller
     }
 
     public function groupedByCategory() {
-        $byGroup = Expense::groupBy('category_id', 'id')->get();
-        // return Expense::with('category')->get();
-        return $byGroup;
+        // return Expense::groupBy('category_id', 'id')->get();
+        return Expense::all()
+            ->groupBy(function ($expense) {
+                return $expense->category_id;
+            })
+            ->map(function ($category) {
+                return $category->sum('amount');
+            });
     }
 
     public function groupedByMonth() {
-        // $byMonth = Expense::groupBy('category_id')->get();
-        // return $byMonth;
-        
-        // $bymonth = Expense::groupBy(function($d) {
-        //     return Carbon::parse($d->date)->format('Y', 'm');
-        // })->get();
-        // return Expense::select('category_id', 'amount', 'date')
-        return Expense::select('*')
-        ->get()
-        ->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('Y-m'); // grouping by years and its month
-        });
-
-        // return $byMonth;
-
-        // $months = NewsItem::get()->groupBy(function($d) {
-        //     return Carbon::parse($d->created_at)->format('m');
+        // return Expense::select('*')
+        // ->get()
+        // ->groupBy(function($date) {
+        // return Carbon::parse($date->created_at)->format('F Y');
         // });
+
+        return Expense::all()
+            ->groupBy(function ($expense) {
+                return $expense->created_at->format('F Y');
+            })
+            ->map(function ($month) {
+                return $month->sum('amount');
+            });
     }
 }

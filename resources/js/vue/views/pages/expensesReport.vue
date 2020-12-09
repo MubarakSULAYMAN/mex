@@ -15,14 +15,14 @@
 
             <table class="table-fixed w-full my-4 md:my-12 shadow-lg bg-white border-collapse border hover:border-purple-700 text-sm md:text-base font-thin md:font-normal">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="p-2 md:px-8 md:py-4"> Period </th>
-                    <th class="p-2 md:px-8 md:py-4"> Category </th>
-                    <th class="p-1 md:px-8 md:py-4"> Amount </th>
+                    <!-- <th class="w-1 p-2 md:px-8 md:py-4"> S/N </th> -->
+                    <th class="w-2 p-2 md:px-8 md:py-4"> Period </th>
+                    <th class="w-2 p-2 md:px-8 md:py-4"> Amount </th>
                 </tr>
-                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
-                    <td class="border p-2 md:px-8 md:py-4"> Some superstory about fantasy. </td>
-                    <td class="border p-2 md:px-8 md:py-4"> Food </td>
-                    <td class="border p-1 md:px-8 md:py-4"> NGN5,000 </td>
+                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white" v-for="(value, key, index) in report" :key="`${ key }-${ index }`">
+                    <!-- <td class="border p-2 md:px-8 md:py-4"> {{ +index }} </td> -->
+                    <td class="border p-2 md:px-8 md:py-4"> {{ value }} </td>
+                    <td class="border p-2 md:px-8 md:py-4"> {{ key }} </td>
                 </tr>
             </table>
 
@@ -43,7 +43,7 @@
 
         data: function() {
             return {
-
+                report: []
             }
         },
 
