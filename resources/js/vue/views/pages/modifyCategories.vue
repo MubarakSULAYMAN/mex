@@ -67,13 +67,15 @@
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.name }}</td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.updated_at | formatDate }}</td>
-                        <td class="border p-2 md:px-8 md:py-4 break-words"> <span v-if="item.expenses.length > 0"> Active </span> <span class="line-through" v-if="item.expenses.length < 1"> Inactive </span> </td>
+                        <td class="border p-2 md:px-8 md:py-4 break-words"> <span v-if="item.expenses.length > 0"> Active </span> <span class="line-through" v-if="item.expenses.length < 1"> Inactive
+                            </span> </td>
                     </tr>
                 </table>
             </div>
 
             <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
-            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700"
+                v-if="categories.length < 1 && loading === false"> No Record Available
             </div>
         </section>
 
@@ -120,7 +122,8 @@
                 </table>
 
                 <div class="p-6 text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
-                <div class="p-6 text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
+                <div class="p-6 text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700"
+                    v-if="categories.length < 1 && loading === false"> No Record Available </div>
 
                 <div class="fixed bottom-5 md:bottom-10 right-5 md:right-10 space-x-6 z-50">
                     <button
@@ -233,7 +236,7 @@
                 if (this.category.name === "") {
                     this.fieldError = true;
                     return;
-                } 
+                }
                 // else if (!navigator.onLine) {
                 //     this.noInternetConnection = true;
                 //     return;
@@ -245,6 +248,7 @@
 
                 this.fieldError = false;
                 this.noInternetConnection = false;
+                this.loading = true;
 
                 axios
                     .post("/api/category/store", {
@@ -255,6 +259,7 @@
                             this.$store.dispatch('getCategories')
                             // this.category.name = "";
                             this.addRecordPopUp = true;
+                            this.loading = false;
                             // console.log(response)
                         }
                     })
@@ -289,12 +294,15 @@
                 //     return;
                 // }
 
+                this.loading = true;
                 axios
                     .delete('/api/category/' + this.category.id)
                     .then(response => {
                         if (response.status === 200) {
                             this.$store.dispatch('getCategories')
                         }
+
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -334,6 +342,7 @@
                 //     return;
                 // }
 
+                this.loading = true;
                 axios
                     .put("api/category/" + this.category.id)
                     .then((response) => {
@@ -341,6 +350,8 @@
                             this.$store.dispatch('getCategories')
                             this.category.name === "";
                         }
+
+                        this.loading = false;
                     })
                     .catch((error) => {
                         console.log(error.message);

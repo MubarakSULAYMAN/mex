@@ -28,7 +28,8 @@
                                     class="rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-300 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap"
                                     disabled value="">Please select an option</option>
                                 <option
-                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap" v-for="(item, index) in categories" :key="index" :value="item.id">
+                                    class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap"
+                                    v-for="(item, index) in categories" :key="index" :value="item.id">
                                     {{ item.name }}</option>
                             </select>
                         </td>
@@ -298,10 +299,11 @@
                 // console.log("Sending...");
 
                 console.log(this.expense.narration);
-                    console.log(this.expense.category_id);
-                    console.log(this.expense.amount);
-                    console.log(this.expense.date);
+                console.log(this.expense.category_id);
+                console.log(this.expense.amount);
+                console.log(this.expense.date);
 
+                this.loading = true;
                 axios
                     .post("/api/expense/store", {
                         // expense: this.expense
@@ -318,6 +320,7 @@
                             // this.expenses.amount = "";
                             // this.expenses.date = "";
                             this.addRecordPopUp = true;
+                            this.loading = false;
                         }
                     })
                     .catch((error) => {
@@ -339,12 +342,15 @@
                 //     return;
                 // }
 
+                this.loading = true;
                 axios
                     .delete('/api/category/' + this.category.id)
                     .then(response => {
                         if (response.status === 200) {
                             this.$store.dispatch('getExpenses')
                         }
+
+                        this.loading = false;
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -385,6 +391,7 @@
                 //     return;
                 // }
 
+                this.loading = true;
                 axios
                     .put("api/expense/" + this.expense.id)
                     .then((response) => {
@@ -392,6 +399,8 @@
                             this.$store.dispatch('getExpenses')
                             this.expense.name === "";
                         }
+
+                        this.loading = false;
                     })
                     .catch((error) => {
                         console.log(error.message);

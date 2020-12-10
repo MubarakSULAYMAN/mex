@@ -35,7 +35,7 @@
             </div>
             
             <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent text-center hover:text-white hover:bg-purple-700" v-if="loading === true"> Loading... </div>
-            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700" v-if="categories.length < 1"> No Record Available </div>
+            <div class="p-3 sm:p-6 text-lg sm:text-5xl md:text-9xl text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out hover:shadow-none hover:text-white hover:bg-purple-700" v-if="categories.length < 1 && loading === false"> No Record Available </div>
         </div>
     </div>
 </template>
