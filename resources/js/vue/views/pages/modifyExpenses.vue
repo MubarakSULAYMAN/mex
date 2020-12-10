@@ -46,7 +46,7 @@
                 </table>
 
                 <!-- {{selection}} -->
-                {{expense.category_id}}
+                <!-- {{expense.category_id}} -->
                 <div class="mt-2 text-xs text-red-700 font-medium" v-if="fieldError">
                     You cannot add an empty field, all fields are required.
                 </div>

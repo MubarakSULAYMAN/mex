@@ -17,7 +17,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        return Expense::all();
+        return Expense::with('category')->get();
     }
 
     /**
@@ -103,9 +103,19 @@ class ExpenseController extends Controller
         //                 ->groupBy('category_id')
         //                 ->get();
 
+    //     User::selectRaw('users.name, count(*) submitted_games')
+    // ->join('games', 'games.user_id', '=', 'users.id')
+    // ->groupBy('users.name')
+    // ->orderBy('submitted_games', 'DESC')
+    // ->get();
+
         // return Expense::all()->groupBy('category_id');
 
-        return Category::with('expenses')->get()->groupBy('category_id');
+        // $x = Category::with('expenses')->get()->groupBy('id')->where('expenses', '>', '0');
+        // $x = Category::with('expenses')->get()->groupBy('id');
+        // $x = Expense::with('category')->get()->groupBy('id');
+        // $x = Expense::with('category')->get()->groupBy('id');
+        // return $x;
     }
 
     public function groupedByMonth() {
