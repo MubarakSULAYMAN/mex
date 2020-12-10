@@ -67,7 +67,7 @@
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.name }}</td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">{{ item.updated_at | formatDate }}</td>
-                        <td class="border p-2 md:px-8 md:py-4 break-words">Active</td>
+                        <td class="border p-2 md:px-8 md:py-4 break-words"> <span v-if="item.expenses.length > 0"> Active </span> <span class="line-through" v-if="item.expenses.length < 1"> Inactive </span> </td>
                     </tr>
                 </table>
             </div>
@@ -111,7 +111,7 @@
                                 type="text" name="" autocomplete="off" id="" v-if="isEditing" /> -->
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">
-                            <span> Active </span>
+                            <span> <span v-if="item.expenses.length > 0"> Active </span> <span class="line-through" v-if="item.expenses.length < 1"> Inactive </span> </span>
                             <!-- <input
                                 class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" autocomplete="off" v-if="isEditing" /> -->
