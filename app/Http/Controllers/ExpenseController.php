@@ -98,24 +98,11 @@ class ExpenseController extends Controller
         return "Record not found.";
     }
 
-    public function groupedByCategory() {
-        // Expense::select("*", DB::raw("count(*) as expense_count"))
-        //                 ->groupBy('category_id')
-        //                 ->get();
-
-    //     User::selectRaw('users.name, count(*) submitted_games')
-    // ->join('games', 'games.user_id', '=', 'users.id')
-    // ->groupBy('users.name')
-    // ->orderBy('submitted_games', 'DESC')
-    // ->get();
-
-        // return Expense::all()->groupBy('category_id');
-
-        // $x = Category::with('expenses')->get()->groupBy('id')->where('expenses', '>', '0');
-        // $x = Category::with('expenses')->get()->groupBy('id');
-        // $x = Expense::with('category')->get()->groupBy('id');
-        // $x = Expense::with('category')->get()->groupBy('id');
-        // return $x;
+    public function groupedByCategory() {;
+        // return Category::has('expenses')->get();
+        
+        $rsult = category::query()->with('expenses')->has('expenses')->get();
+        return $rsult;
     }
 
     public function groupedByMonth() {
