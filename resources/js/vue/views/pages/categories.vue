@@ -29,7 +29,7 @@
                     </td>
                     <td class="border p-2 md:px-8 md:py-4 break-words"> {{ item.name }} </td>
                     <td class="border p-2 md:px-8 md:py-4 break-words"> {{ item.updated_at | formatDate }} </td>
-                    <td class="border p-2 md:px-8 md:py-4 break-words"> Active </td>
+                    <td class="border p-2 md:px-8 md:py-4 break-words"> <span v-if="item.expenses.length > 0"> Active </span> <span class="line-through" v-if="item.expenses.length < 1"> Inactive </span> </td>
                 </tr>
             </table>
             </div>

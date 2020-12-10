@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Models\Expense;
 use App\Models\Category;
 
@@ -17,13 +17,7 @@ class ExpenseController extends Controller
      */
     public function index()
     {
-        // return Expense::all();
-        // return Expense::orderBy('created_at', 'DESC')->get();
-        // return Expense::latest()->get();
-        // return Expense::with('expenses', 'category')->get();
-        return Expense::with('category')->get();
-
-        // return Expense::with('expenses', 'category')->get();
+        return Expense::all();
     }
 
     /**
@@ -46,12 +40,6 @@ class ExpenseController extends Controller
     {
         $newExpense = new Expense;
         $newExpense = Expense::create($request->all());
-
-        // error_log($newExpense);
-        // LOG::info($newExpense);
-        // LOG::debug($newExpense);
-
-        // dd($request->all());
 
         $newExpense->save();
 
@@ -111,14 +99,13 @@ class ExpenseController extends Controller
     }
 
     public function groupedByCategory() {
-        // return Expense::groupBy('category_id', 'id')->get();
-        return Expense::all()
-            ->groupBy(function ($expense) {
-                return $expense->category_id;
-            })
-            ->map(function ($category) {
-                return $category->sum('amount');
-            });
+        // Expense::select("*", DB::raw("count(*) as expense_count"))
+        //                 ->groupBy('category_id')
+        //                 ->get();
+
+        // return Expense::all()->groupBy('category_id');
+
+        return Category::with('expenses')->get()->groupBy('category_id');
     }
 
     public function groupedByMonth() {

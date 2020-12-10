@@ -3,7 +3,7 @@
         <the-shortcuts />
 
         <div class="mb-3">
-            <p class="font-light md:text-xl"> Hi, your expense summary is ready. </p>
+            <p class="font-light md:text-xl"> Hi, your expense summarry is ready. </p>
             <p class="font-light md:text-xl"> Kindly keep your credentials safe and personal. </p>
         </div>
 
@@ -18,9 +18,10 @@
                     <th class="w-3/5 p-2 md:px-8 md:py-4"> Category </th>
                     <th class="w-2/5 p-2 md:px-8 md:py-4"> Amount </th>
                 </tr>
-                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white">
-                    <td class="border p-2 md:px-8 md:py-4"> Food </td>
-                    <td class="border p-2 md:px-8 md:py-4"> NGN5,000 </td>
+                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white" v-for="(item, index) in summarries" :key="index">
+                    <!-- <td class="border p-2 md:px-8 md:py-4" v-if="item.expense.length > 0"> {{ item }} </td> -->
+                    <td class="border p-2 md:px-8 md:py-4"> {{ item.name }} </td>
+                    <td class="border p-2 md:px-8 md:py-4"> {{ item.id }} </td>
                 </tr>
             </table>
 
@@ -40,7 +41,7 @@
 
         data: function () {
             return {
-                summary: []
+                summarries: []
             }
         },
 
@@ -48,7 +49,10 @@
             generateReport() {
                 axios.get('/api/expense/group/by-category')
                     .then(response => {
-                        this.summary = response.data
+                        // this.summarries = JSON.stringify(response.data)
+                        let x = response.data;
+                        console.log(x.slice(0, x.length))
+                        // console.log(response.data)
                     })
                     .catch(error => {
                         console.log(error.message);
