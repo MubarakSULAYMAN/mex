@@ -31,5 +31,8 @@
         "vue-offline": "^2.0.8",
         "vue-router": "^3.4.9",
         "vuex": "^3.6.0"
-    }
+    },
+    "engines": {
+        "node": ">=12.x"
+      }
 }
