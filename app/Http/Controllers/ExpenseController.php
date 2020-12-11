@@ -103,21 +103,39 @@ class ExpenseController extends Controller
         
         $rsult = category::query()->with('expenses')->has('expenses')->get();
         return $rsult;
+
+        // $rsult = Expense::groupBy('id')->get();
+        // return $rsult;
+
+        // $rsult = Category::with('expenses')->get()->groupBy('id');
+        // return $rsult;
+        
+        // return Expense::with()
     }
 
     public function groupedByMonth() {
+        return Expense::select('*')
+        ->get()
+        ->groupBy(function($date) {
+        return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+        })->map(function($expense){
+        return $expense->groupBy(function($date){
+        return Carbon::parse($date->created_at)->format('m'); // grouping by years
+        });
+        });
+
         // return Expense::select('*')
         // ->get()
-        // ->groupBy(function($date) {
-        // return Carbon::parse($date->created_at)->format('F Y');
+        // ->groupBy(function($expense) {
+        // return Carbon::parse($expense->created_at)->format('F Y');
         // });
 
-        return Expense::all()
-            ->groupBy(function ($expense) {
-                return $expense->created_at->format('F Y');
-            })
-            ->map(function ($month) {
-                return $month->sum('amount');
-            });
+        // return Expense::all()
+        //     ->groupBy(function ($expense) {
+        //         return $expense->created_at->format('F Y');
+        //     })
+        //     ->map(function ($month) {
+        //         return $month->sum('amount');
+        //     });
     }
 }
