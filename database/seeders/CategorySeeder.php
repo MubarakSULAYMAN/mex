@@ -19,23 +19,28 @@ class CategorySeeder extends Seeder
         DB::table('categories')->insert(array(
             array(
                 'name' => 'Food',
-                'updated_at' => '01/01/2020',
+                "created_at" => '01/01/2020',
+                "updated_at" => '01/01/2020',
             ),
             array(
                 'name' => 'Rent',
-                'updated_at' => '01/01/2020',
+                "created_at" => '01/01/2020',
+                "updated_at" => '01/01/2020',
             ),
             array(
                 'name' => 'Transport',
-                'updated_at' => '01/01/2020',
+                "created_at" => '01/01/2020',
+                "updated_at" => '01/01/2020',
             ),
             array(
                 'name' => 'Telephone',
-                'updated_at' => '01/01/2020',
+                "created_at" => '01/01/2020',
+                "updated_at" => '01/01/2020',
             ),
             array(
                 'name' => 'Utilities',
-                'updated_at' => '01/01/2020',
+                "created_at" => '01/01/2020',
+                "updated_at" => '01/01/2020',
             ),
         ));
     }
