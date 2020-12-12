@@ -16,13 +16,15 @@
 
             <table class="table-fixed w-full my-4 md:my-12 shadow-lg bg-white border-collapse border hover:border-purple-700">
                 <tr class="bg-purple-700 border border-collapse text-white text-center">
-                    <th class="w-3/5 p-2 md:px-8 md:py-4"> Category </th>
-                    <th class="w-2/5 p-2 md:px-8 md:py-4"> Amount </th>
+                    <th class="w-2/5 p-2 md:px-8 md:py-4"> Category </th>
+                    <th class="w-1/5 p-2 md:px-8 md:py-4"> Transaction Count </th>
+                    <th class="w-2/5 p-2 md:px-8 md:py-4"> Amount Expelled </th>
                 </tr>
                 <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
                     v-for="(item, index) in summary" :key="index">
                     <!-- <td class="border p-2 md:px-8 md:py-4" v-if="item.expense.length > 0"> {{ item }} </td> -->
-                    <td class="border p-2 md:px-8 md:py-4"> {{ item }} </td>
+                    <td class="border p-2 md:px-8 md:py-4"> {{ item.name }} </td>
+                    <td class="border p-2 md:px-8 md:py-4"> {{ item.expenses.length }} </td>
                     <td class="border p-2 md:px-8 md:py-4"> {{ item }} </td>
                 </tr>
             </table>

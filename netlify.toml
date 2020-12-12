@@ -1,7 +1,10 @@
 [build]
-  command = "npm run build"
+  [[command = "npm run build"]]
+  command = “CI= npm run build”
   publish="dist"
+  [[base = "./resources/js/vue"]]
   base = "resources"
+  [[CI='' npm run build]]
 
 [[redirects]]
   from = "/*"

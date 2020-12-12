@@ -114,21 +114,21 @@ class ExpenseController extends Controller
     }
 
     public function groupedByMonth() {
-        return Expense::select('*')
-        ->get()
-        ->groupBy(function($date) {
-        return Carbon::parse($date->created_at)->format('Y'); // grouping by years
-        })->map(function($expense){
-        return $expense->groupBy(function($date){
-        return Carbon::parse($date->created_at)->format('m'); // grouping by years
-        });
-        });
-
         // return Expense::select('*')
         // ->get()
-        // ->groupBy(function($expense) {
-        // return Carbon::parse($expense->created_at)->format('F Y');
+        // ->groupBy(function($date) {
+        // return Carbon::parse($date->created_at)->format('Y'); // grouping by years
+        // })->map(function($expense){
+        // return $expense->groupBy(function($date){
+        // return Carbon::parse($date->created_at)->format('m'); // grouping by years
         // });
+        // });
+
+        return Expense::select('*')
+        ->get()
+        ->groupBy(function($expense) {
+        return Carbon::parse($expense->created_at)->format('F Y');
+        });
 
         // return Expense::all()
         //     ->groupBy(function ($expense) {
