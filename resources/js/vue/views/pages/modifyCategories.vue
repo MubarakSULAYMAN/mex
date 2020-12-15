@@ -103,7 +103,7 @@
                         <td class="border p-2 md:px-8 md:py-4 break-words">
                             <span v-if="isEditing === false"> {{ item.name }} </span>
                             <input
-                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
+                                class="w-full p-2 border-2 border-transparent shadow-lg rounded-md font-medium transform transition duration-1000 ease-in-out hover:text-purple-700 hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
                                 type="text" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.name" />
                         </td>
                         <td class="border p-2 md:px-8 md:py-4 break-words">

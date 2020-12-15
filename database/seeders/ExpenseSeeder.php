@@ -14,7 +14,7 @@ class ExpenseSeeder extends Seeder
      */
     public function run()
     {
-        $expense = Expense::factory(79)->create();
+        $expense = Expense::factory(123)->create();
         return $expense;
     }
 }

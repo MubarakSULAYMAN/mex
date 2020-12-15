@@ -138,14 +138,13 @@
                             <span v-if="isEditing === false"> {{ item.category.name }} </span>
                             <select
                                 class="w-full p-2 text-purple-700 bg-white border-2 border-transparent shadow-lg rounded-md md:font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                v-if="isEditing">
+                                v-if="isEditing" v-model="item.name">
                                 <option
                                     class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-1 md:py-2 md:px-4 block whitespace-no-wrap"
                                     disabled value="">Please select one</option>
                                 <option
                                     class="first:rounded-t last:rounded-b bg-white transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white py-2 px-4 block whitespace-no-wrap"
-                                    :value="value">
-                                    Indiana</option>
+                                    > </option>
                             </select>
                         </td>
                         <td class="border p-1 md:px-8 md:py-4">
@@ -155,10 +154,11 @@
                                 type="number" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.amount">
                         </td>
                         <td class="border p-1 md:px-8 md:py-4">
-                            <span v-if="isEditing === false"> {{ item.date | formatDate }} </span>
-                            <input
+                            <!-- <span v-if="isEditing === false"> {{ item.date | formatDate }} </span> -->
+                            <span> {{ item.date | formatDate }} </span>
+                            <!-- <input
                                 class="w-full p-2 text-purple-700 border-2 border-transparent shadow-lg rounded-md md:font-medium transform transition duration-1000 ease-in-out hover:shadow-lg focus:outline-none focus:border-purple-700 focus:ring-0 focus:ring-purple-500"
-                                type="date" min="2020-12-8" max="2030-12-31" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.date">
+                                type="date" min="2020-12-8" max="2030-12-31" name="" id="" autocomplete="off" v-if="isEditing" v-model="item.date"> -->
                         </td>
                     </tr>
                 </table>
