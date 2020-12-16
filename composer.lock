@@ -2201,7 +2201,8 @@
                 "shasum": ""
             },
             "require": {
-                "php": "^7.2 || ^8"
+                "php": "^7.2 || ^8",
+                "fzaninotto/faker": "^1.5"
             },
             "require-dev": {
                 "captainhook/captainhook": "^5.3",
