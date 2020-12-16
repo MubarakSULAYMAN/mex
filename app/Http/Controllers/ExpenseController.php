@@ -99,8 +99,7 @@ class ExpenseController extends Controller
     }
 
     public function groupedByCategory() {;
-        // return Category::has('expenses')->get();
-        
+        // ->orderByDesc('expenses')
         $rsult = category::query()->with('expenses')->has('expenses')->get();
         return $rsult;
 
