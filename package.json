@@ -1,7 +1,7 @@
 {
     "private": true,
     "scripts": {
-        "dev": "npm run webpack -- --mode development --watch",
+        "dev": "npm run development",
         "development": "cross-env NODE_ENV=development node_modules/webpack/bin/webpack.js --progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "watch": "npm run development -- --watch",
         "watch-poll": "npm run watch -- --watch-poll",
@@ -10,9 +10,8 @@
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
         "postinstall": "npm run prod",
         "heroku-postbuild": "npm run prod && npm install && npm run build",
-        "build": "npm run webpack -- --mode production",
-        "start": "nf start",
-        "webpack" : "webpack"
+        "build": "webpack install && bower install && grunt build",
+        "start": "nf start"
     },
     "devDependencies": {
         "axios": "^0.19",
