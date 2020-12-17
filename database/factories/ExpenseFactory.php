@@ -25,7 +25,8 @@ class ExpenseFactory extends Factory
             'narration' => $this -> faker -> sentence($nbWords = 7, $variableNbWords = true),
             'category_id' => $this -> faker -> randomElement($array = array (1, 2, 3, 4, 5)),
             'amount' => $this -> faker -> numberBetween($min = 1000, $max = 900000),
-            'date' => $this -> faker -> dateTimeThisMonth($max = 'now', $timezone = 'Africa/Lagos', 'd-m-Y'),
+            'date' => $this -> faker -> dateTimeInInterval($startDate = '-89 days', $interval = '+ 7 days', $timezone = 'Africa/Lagos', 'd-m-Y')
+            // 'date' => $this -> faker -> dateTimeThisYear($max = 'now', $timezone = 'Africa/Lagos', 'd-m-Y'),
             // 'created_at' => $this -> faker -> dateTimeThisYear($max = 'now', $timezone = null, 'd-m-Y'),
             // 'updated_at' => $this -> faker -> dateTimeThisYear($max = 'now', $timezone = null, 'd-m-Y'),
         ];

@@ -64,20 +64,14 @@
         },
 
         methods: {
-            generateReport() {
-                axios.get('/api/expense/group/by-category')
+            generateSummary() {
+                axios
+                    .get('/api/expense/group/by-category')
                     .then(response => {
-                        // this.summary = (response.data).slice(0, response.data.length)
                         if (response.data.expenses !== 0) {
                             this.summary = (response.data)
                             this.expenses_summary = arr.map((obj)=> obj.expenses)
                         }
-                        // console.log(JSON.stringify(response.data))
-
-                        // Object.keys(response.data).forEach((property) => {
-                        // Access each object here by using response[property]...
-                        //     console.log(response.data[property])
-                        // })
                     })
                     .catch(error => {
                         console.log(error.message);
@@ -86,7 +80,7 @@
         },
 
         created() {
-            this.generateReport();
+            this.generateSummary();
         }
     }
 

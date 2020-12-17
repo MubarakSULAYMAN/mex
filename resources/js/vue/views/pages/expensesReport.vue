@@ -19,9 +19,9 @@
                     <th class="w-2 p-2 md:px-8 md:py-4"> Period </th>
                     <th class="w-2 p-2 md:px-8 md:py-4"> Amount </th>
                 </tr>
-                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white" v-for="(value, key, index) in report" :key="`${ key }-${ index }`">
-                    <!-- <td class="border p-2 md:px-8 md:py-4"> {{ +index }} </td> -->
-                    <td class="border p-2 md:px-8 md:py-4"> {{ value }} </td>
+                <tr class="border border-collapse even:border-purple-700 text-purple-700 font-medium text-center transform transition duration-500 ease-in-out hover:bg-purple-500 hover:text-white"
+                    v-for="(item, index) in report" :key="index">
+                    <td class="border p-2 md:px-8 md:py-4"> {{ item }} </td>
                     <td class="border p-2 md:px-8 md:py-4"> {{ key }} </td>
                 </tr>
             </table>
@@ -30,6 +30,7 @@
             <p class="text-right tracking-tighter md:leading-loose">Your Expense Management App</p>
             <p class="text-right tracking-tighter md:leading-loose">12/12/2020</p>
         </div>
+        <h1>
     </div>
 </template>
 
@@ -41,7 +42,7 @@
             theShortcuts,
         },
 
-        data: function() {
+        data: function () {
             return {
                 report: []
             }
@@ -50,14 +51,20 @@
         methods: {
             generateReport() {
                 axios
-                get("/api/expense/group/by-month")
+                    .get("/api/expense/group/by-month")
                     .then(response => {
-                        this.report = response.data
+                        if (response.data.expenses !== 0) {
+                            this.report = (response.data)
+                        }
                     })
                     .catch(error => {
                         console.log(error.message);
                     });
             }
+        },
+
+        created() {
+            this.generateReport();
         }
     }
 
