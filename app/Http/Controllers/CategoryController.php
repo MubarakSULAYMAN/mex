@@ -16,18 +16,7 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        // DB::table('categories')
-        //     ->select('*', DB::raw('count(*) as total'))
-        //     ->groupBy('id')->get();
-
-        // $x = Category::with('expenses')->get();
-        // $y = Category::has('expenses')->get();
-        // $z = $y->merge($x);
-        // return $z->all();
-
-
         return Category::with('expenses')->get();
-        // return Category::has('expenses')->get();
     }
 
     /**
@@ -89,17 +78,13 @@ class CategoryController extends Controller
         $existingCategory = Category::find($id);
 
         if ($existingCategory) {
-            
-        $existingCategory->narration = $request->get('narration');
-        $existingCategory->category = $request->get('category');
-        $existingCategory->amount = $request->get('amount');
-        $existingCategory->date = $request->get('date');
-        $existingCategory->save();
+            $existingCategory->name = $request->category["name"];
+            $existingCategory->save();
 
-        return $existingCategory;
+            return $existingCategory;
         }
 
-        return "No result found.";
+        return "Record not found.";
     }
 
     /**
@@ -123,5 +108,15 @@ class CategoryController extends Controller
     public function getWithExpense() {
         $withExpense = Category::has('expenses')->get();
         return $withExpense;
+    }
+
+    public function getCategoryById($id) {
+        $requestedCategory = Category::find($id);
+        
+        if ($requestedCategory) {
+            return $requestedCategory;
+        }
+
+        return "Record not found.";
     }
 }

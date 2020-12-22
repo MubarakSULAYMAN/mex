@@ -77,7 +77,18 @@ class ExpenseController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        
+        $existingExpense = Expense::find($id);
+
+        if ($existingExpense) {
+            $existingExpense = Expense::create($request->all());
+        
+            $existingExpense->save();
+
+            return $existingExpense;
+        }
+
+        return "Record not found.";
     }
 
     /**
@@ -111,5 +122,15 @@ class ExpenseController extends Controller
         return Carbon::parse($expense->created_at)->format('F Y');
         });
         return $month_group;
+    }
+
+    public function getExpenseById($id) {
+        $requestedExpense = Expense::find($id);
+        
+        if ($requestedExpense) {
+            return $requestedExpense;
+        }
+
+        return "Record not found.";
     }
 }

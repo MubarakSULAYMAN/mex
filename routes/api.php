@@ -34,6 +34,7 @@ Route::prefix('/category')->group( function() {
     Route::put('/{id}', [CategoryController::class, 'update']);
     Route::delete('{id}', [CategoryController::class, 'destroy']);
     Route::get('/with-expense', [CategoryController::class, 'getWithExpense']);
+    Route::get('/by-id/{id}', [CategoryController::class, 'getCategoryById']);
 
 });
 
@@ -42,6 +43,7 @@ Route::prefix('/expense')->group( function() {
     Route::post('/store', [ExpenseController::class, 'store']);
     Route::put('/{id}', [ExpenseController::class, 'update']);
     Route::delete('{id}', [ExpenseController::class, 'destroy']);
+    Route::get('/by-id/{id}', [ExpenseController::class, 'getExpenseById']);
 
     Route::prefix('/group')->group( function() {
         Route::get('/by-category', [ExpenseController::class, 'groupedByCategory']);
