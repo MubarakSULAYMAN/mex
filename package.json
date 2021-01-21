@@ -8,9 +8,7 @@
         "hot": "cross-env NODE_ENV=development node_modules/webpack-dev-server/bin/webpack-dev-server.js --inline --hot --disable-host-check --config=node_modules/laravel-mix/setup/webpack.config.js",
         "prod": "npm run production",
         "production": "cross-env NODE_ENV=production node_modules/webpack/bin/webpack.js --no-progress --config=node_modules/laravel-mix/setup/webpack.config.js",
-        "postinstall": "npm run prod",
-        "heroku-prebuild": "npm install -f",
-        "heroku-postbuild": "npm run build",
+        "heroku-postbuild": "npm run production"
         "build": "webpack install && bower install && grunt build",
         "start": "nf start"
     },
@@ -39,8 +37,5 @@
     "engines": {
         "node": "14.15.1",
         "npm": "6.14.11"
-    },
-    "optionalDependencies": {
-        "fsevents": "2.3.1"
     }
 }
