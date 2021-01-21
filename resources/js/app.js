@@ -1,14 +1,16 @@
 require('./bootstrap');
 
 import Vue from 'vue';
-import App from './vue/app';
+import App from './vue/App';
 import router from './vue/router';
 import Vuex from 'vuex';
 import store from './vue/store';
-import dayjs from 'dayjs'
-import VueOffline from 'vue-offline'
+import dayjs from 'dayjs';
+import VueOffline from 'vue-offline';
 
 import 'remixicon/fonts/remixicon.css';
+
+import '../js/vue//assets/styles/index.css';
 
 import {
     library
@@ -35,15 +37,15 @@ library.add(faFolderPlus, faHighlighter, faFileInvoice, faEdit, faBackspace, faS
 
 Vue.component('font-awesome-icon', FontAwesomeIcon)
 
-Vue.use(Vuex) 
-// Vue.use(VueOffline, {
-//     mixin: false
-// })
+Vue.use(Vuex)
+    // Vue.use(VueOffline, {
+    //     mixin: false
+    // })
 Vue.use(VueOffline)
 
 Vue.config.productionTip = false
 
-Vue.filter('formatDate', function (value) {
+Vue.filter('formatDate', function(value) {
     if (value) {
         //   return moment(String(value)).format('MM/DD/YYYY hh:mm')
         return dayjs(String(value)).format('DD/MM/YYYY')

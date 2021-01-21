@@ -1,10 +1,10 @@
-import Vue from 'vue';
-import vuex from 'vuex'
-import axios from 'axios';
+import Vue from 'vue'
+import Vuex from 'vuex'
+import axios from 'axios'
 
-Vue.use(vuex)
+Vue.use(Vuex)
 
-export default new vuex.Store({
+export default new Vuex.Store({
     state: {
         // queryResult: null,
         loading: true,
@@ -82,5 +82,6 @@ export default new vuex.Store({
     getters: {
         queryResult: (state) => state.queryResult,
         loading: (state) => state.loading
-    }
+    },
+    modules: {}
 })

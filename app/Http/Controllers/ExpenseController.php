@@ -125,7 +125,10 @@ class ExpenseController extends Controller
     }
 
     public function getExpenseById($id) {
+        // $requestedExpense = Expense::find($id);
+        // $requestedExpense = Expense::find($id)::with('category')->get();
         $requestedExpense = Expense::find($id);
+        // $requestedExpense = category::query()->with('expenses')->has('expenses')::find($id);
         
         if ($requestedExpense) {
             return $requestedExpense;

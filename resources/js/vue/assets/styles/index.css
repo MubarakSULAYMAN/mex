@@ -1,0 +1,210 @@
+@tailwind base;
+@tailwind components;
+
+.custom-info {
+    @apply p-3 text-lg text-purple-700 bg-transparent shadow-2xl rounded-3xl text-center transform transition duration-1000 ease-in-out;
+}
+
+.custom-info:hover {
+    @apply shadow-none text-white bg-purple-700
+}
+
+.custom-row {
+    @apply border border-collapse text-purple-700 font-medium text-center transform transition duration-500 ease-in-out
+}
+
+.custom-row:hover {
+    @apply bg-purple-500 text-white
+}
+
+.custom-table-row {
+    @apply group border border-collapse font-normal text-center transform transition duration-500 ease-in-out
+}
+
+.custom-table-row:hover {
+    @apply bg-purple-500 text-white
+}
+
+.custom-table-input {
+    @apply w-full p-2 text-purple-700 border-2 border-transparent shadow-lg rounded-md transform transition duration-1000 ease-in-out
+}
+
+.custom-table-input:hover {
+    @apply shadow-lg
+}
+
+.custom-table-input:focus {
+    @apply outline-none border-purple-700 ring-0 ring-purple-500
+}
+
+.custom-btn {
+    @apply p-1 rounded-md text-white font-light border transform transition duration-500 ease-in-out
+}
+
+.custom-btn:hover {
+    @apply bg-transparent shadow-lg bg-purple-100
+}
+
+.custom-btn:focus {
+    @apply outline-none ring-2 ring-opacity-50
+}
+
+.home-btn {
+    @apply bg-purple-700 box-border h-48 p-10 rounded-3xl text-white text-3xl font-extrabold cursor-pointer transform transition duration-500 ease-in-out
+}
+
+.home-btn:hover {
+    @apply bg-transparent shadow-2xl text-purple-700
+}
+
+.home-btn:focus {
+    @apply ring-4 ring-purple-700 outline-none
+}
+
+.modify-btn {
+    @apply fixed bottom-10 -right-6 py-1 px-3 rounded-md text-white font-light bg-purple-700 rotate-90 border z-50 transform transition duration-200 ease-in-out
+}
+
+.modify-btn:hover {
+    @apply bg-white shadow-lg text-purple-700
+}
+
+.modify-btn:focus {
+    @apply outline-none ring-2 ring-purple-500 ring-opacity-50
+}
+
+/* md:w-full md:h-11 */
+
+.add-btn {
+    @apply rounded-md text-white bg-purple-700 transform transition duration-500 ease-in-out
+}
+
+.add-btn:hover {
+    @apply bg-transparent shadow-lg text-purple-700
+}
+
+.add-btn:focus {
+    @apply outline-none ring-2 ring-purple-500 ring-opacity-50
+}
+
+.custom-input {
+    @apply w-full p-1 text-purple-700 border-2 border-purple-700 rounded-md transform transition duration-1000 ease-in-out
+}
+
+.custom-input:hover {
+    @apply border-transparent shadow-lg
+}
+
+.custom-input:focus {
+    @apply outline-none ring-0 ring-purple-500
+}
+
+.custom-modal {
+    @apply fixed top-64 left-10 pb-6 text-xs group shadow-2xl bg-white rounded-tl-3xl rounded-tr-xl rounded-br-3xl rounded-bl-xl select-none
+}
+
+.custom-table {
+    @apply table-fixed shadow-lg bg-white border-collapse border text-xs mb-36
+}
+
+.custom-table:hover {
+    @apply border-purple-700
+}
+
+.shortcut-btn {
+    @apply pt-2 pl-2 pb-1 rounded-full text-white font-light text-xl bg-purple-700 transform transition duration-500 ease-in-out border
+}
+
+.shortcut-btn:hover {
+    @apply bg-transparent shadow-lg text-purple-700 border-purple-700 bg-purple-100
+}
+
+.shortcut-btn:focus {
+    @apply outline-none ring-2 md:ring-8 ring-purple-500 ring-opacity-50
+}
+
+/* .shortcut-btn {
+    @apply pt-2 md:pt-3 md:pr-1 pl-2 md:pl-3 pb-1 md:pb-2 rounded-full text-white font-light text-xl md:text-2xl bg-purple-700 transform transition duration-500 ease-in-out hover:bg-transparent hover:shadow-lg hover:text-purple-700 focus:outline-none focus:ring-2 md:focus:ring-8 focus:ring-purple-500 focus:ring-opacity-50 border hover:border-purple-700 hover:bg-purple-100
+} */
+
+@screen sm {
+    .custom-info {
+        @apply p-6 text-5xl
+    }
+
+    .modify-btn {
+        @apply bottom-12 -right-8 text-xl
+    }
+
+    .custom-modal {
+        @apply top-56 left-36 text-base
+    }
+}
+
+@screen md {
+    .custom-info {
+        @apply text-9xl
+    }
+
+    .custom-table-row {
+        @apply font-medium
+    }
+
+    .custom-btn {
+        @apply px-4 py-2 font-medium text-lg
+    }
+
+    .custom-btn:focus {
+        @apply ring-8
+    }
+
+    .home-btn {
+        @apply font-medium
+    }
+
+    .home-btn:focus {
+        @apply ring-8
+    }
+
+    .modify-btn {
+        @apply -right-8 bottom-20 py-2 px-6 text-2xl
+    }
+
+    .modify-btn:hover {
+        @apply rotate-0 -translate-x-12 translate-y-16
+    }
+
+    .modify-btn:focus {
+        @apply ring-8
+    }
+
+    .add-btn {
+        @apply h-11 px-2 py-1
+    }
+
+    .add-btn:focus {
+        @apply ring-8
+    }
+
+    .custom-input {
+        @apply p-2 font-medium
+    }
+
+    .custom-modal {
+        @apply top-52 left-96 pb-12
+    }
+
+    .custom-table {
+        @apply text-base font-normal
+    }
+
+.shortcut-btn {
+    @apply pt-3 pr-1 pl-3 pb-2 text-2xl
+}
+
+.shortcut-btn:focus {
+    @apply ring-8
+}
+}
+
+@tailwind utilities;
