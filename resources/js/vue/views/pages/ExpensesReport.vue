@@ -20,8 +20,8 @@
                     <th class="w-2 p-2 md:px-8 md:py-4"> Amount </th>
                 </tr>
                 <tr class="custom-row even:border-purple-700" v-for="(item, index) in report" :key="index">
-                    <td class="border p-2 md:px-8 md:py-4"> {{ item }} </td>
-                    <td class="border p-2 md:px-8 md:py-4"> {{ key }} </td>
+                    <!-- <td class="border p-2 md:px-8 md:py-4"> {{ item }} </td>
+                    <td class="border p-2 md:px-8 md:py-4"> {{ key }} </td> -->
                 </tr>
             </table>
 
